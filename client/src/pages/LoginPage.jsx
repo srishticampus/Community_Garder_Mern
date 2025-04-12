@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import LandingNav from './landing/LandingNav'
 
 function LoginPage() {
   const [formData, setFormData] = useState({
@@ -22,7 +23,8 @@ function LoginPage() {
 
   return (
     <div className="row justify-content-center">
-      <div className="col-md-6">
+      <LandingNav/>
+      <div className="col-md-6 mt-5 pt-5">
         <div className="card">
           <div className="card-body">
             <h2 className="text-center mb-4">Login</h2>

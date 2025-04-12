@@ -1,5 +1,5 @@
-import LandingNav from '../../components/landing/LandingNav'
-import Footer from '../../components/landing/Footer'
+import LandingNav from './LandingNav'
+import Footer from './Footer'
 import { Link } from 'react-router-dom'
 
 function LandingPage() {
