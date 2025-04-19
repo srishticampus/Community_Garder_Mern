@@ -1,5 +1,5 @@
 var gardner = require("../Models/gardnerSchema");
-
+var bcrypt =require("bcrypt")
 const multer = require("multer");
 const storage = multer.diskStorage({
   destination: function (req, res, cb) {
@@ -12,6 +12,8 @@ const storage = multer.diskStorage({
 const uploadimg = multer({ storage: storage }).single("profilePic");
 
 const savegardner = async (req, res) => {
+  console.log(req.body);
+  console.log(req.file);
   try {
     console.log(req.body);
 
@@ -21,9 +23,6 @@ const savegardner = async (req, res) => {
       return res.status(400).json({ message: "Profile picture is required" });
     }
 
-    if (req.body.password !== req.body.confirmPass) {
-      return res.status(400).json({ message: "Passwords do not match" });
-    }
 
     // Hash the password before saving
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -65,6 +64,8 @@ const savegardner = async (req, res) => {
 };
 
 const logingardner = async (req, res) => {
+  console.log(req.body);
+  
     try {
       const { emailId, password } = req.body;
   

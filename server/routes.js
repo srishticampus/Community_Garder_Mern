@@ -5,8 +5,8 @@ var orgcontroller=require("./Controllers/Organizationcontroller");
 
 var route=express.Router();
 
-route.post('/reguser',usercontroller.uploadimg,usercontroller.saveuser);
-route.post('/userlogin',usercontroller.loginvalidateuser);
+route.post('/gardner/register',usercontroller.uploadimg,usercontroller.savegardner);
+route.post('/gardner/login',usercontroller.logingardner);
 
 route.post('/adminlogin',admincontroller.loginvalidateadmin);
 
