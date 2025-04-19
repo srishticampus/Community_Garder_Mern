@@ -1,5 +1,7 @@
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
+import { NavDropdown } from "react-bootstrap";
 
+import "../../assets/css/landingnav.css";
 function LandingNav() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-success fixed-top">
@@ -32,21 +34,52 @@ function LandingNav() {
                 Contact
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/login">
-                Login
-              </Link>
+            <li>
+              <NavDropdown
+                title="Login"
+                id="basic-nav-dropdown"
+                className="nav-link"
+              >
+                <NavDropdown.Item as={Link} to="/login">
+                  Gardner
+                </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/manager/Login">
+                  Manager
+                </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/Cammunity/Login">
+                  Community
+                </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/admin/login">
+                  Admin
+                </NavDropdown.Item>
+
+                <NavDropdown.Divider />
+              </NavDropdown>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link btn btn-outline-light ms-2" to="/signup">
-                Sign Up
-              </Link>
+            <li>
+              <NavDropdown
+                title="Sign up"
+                id="basic-nav-dropdown"
+                className="nav-link"
+              >
+                <NavDropdown.Item as={Link} to="/signup">
+                  Gardner
+                </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/manager/Signup">
+                  Manager
+                </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/Community/Signup">
+                  Community
+                </NavDropdown.Item>
+
+                <NavDropdown.Divider />
+              </NavDropdown>
             </li>
           </ul>
         </div>
       </div>
     </nav>
-  )
+  );
 }
 
-export default LandingNav
+export default LandingNav;
