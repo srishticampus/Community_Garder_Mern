@@ -1,13 +1,41 @@
-const mongoose = require("mongoose");
+var mongoose=require("mongoose");
 
-const OrganizationSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  contactNumber: { type: String, required: true, unique: true },
-  resourcesProvided: { type: [String] },
-  gardensSupported: [{ type: mongoose.Schema.Types.ObjectId, ref: "Garden" }],
-  createdAt: { type: Date, default: Date.now },
+var OrganizationSchema=mongoose.Schema({
+    organizationName: {
+        type:String,
+        required:true
+    },
+    organizationtype: {
+        type:String,
+        required:true
+    },
+    emailId: {
+        type:String,
+        required:true
+    },
+    photo: {
+        type:Object,
+        required:true
+    },
+    address: {
+        type:String,
+        required:true
+    },
+    phoneNo: {
+        type:Number,
+        required:true
+    },
+    password: {
+        type:String,
+        required:true
+    },
+    confirmPass: {
+        type:String,
+        required:true
+    }
 });
 
-const Organization = mongoose.model("Organization", OrganizationSchema);
-module.exports=Organization
+const Organization=mongoose.model('organizations',OrganizationSchema);
+
+module.exports = Organization;
+
