@@ -1,0 +1,92 @@
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    background: #ffffff;
+    padding: 20px;
+    margin-top: 30px;
+  }
+  
+  .card-body {
+    padding: 30px;
+  }
+  
+  .card h2 {
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 30px;
+  }
+  
+  .form-label {
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 8px;
+  }
+  
+  .form-control {
+    border-radius: 8px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    transition: all 0.3s ease;
+  }
+  
+  .form-control:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+  }
+  
+  .btn-success {
+    padding: 12px;
+    font-weight: 500;
+    border-radius: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.2);
+  }
+  
+  .text-center a {
+    color: #28a745;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .text-center a:hover {
+    color: #218838;
+    text-decoration: underline;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .card {
+      margin: 15px;
+    }
+    
+    .card-body {
+      padding: 20px;
+    }
+    
+    .col-md-6 {
+      padding: 0 15px;
+    }
+  }
+  
+  /* Optional: Add animation on load */
+  .card {
+    animation: fadeIn 0.5s ease;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
