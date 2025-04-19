@@ -38,10 +38,10 @@ var UserSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  confirmPass: {
-    type: String,
-    required: true,
-  },
+  // confirmPass: {
+  //   type: String,
+  //   required: true,
+  // },
   yearofexperience: {
     type: Number,
     required: true,
