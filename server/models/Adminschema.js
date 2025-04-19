@@ -1,11 +1,19 @@
-const mongoose = require("mongoose");
+var mongoose=require("mongoose");
+  
+  var AdminSchema=mongoose.Schema({
+      emailId: {
+          type:String,
+          required:true
+      },
+      
+      password: {
+          type:String,
+          required:true
+      },
+      createdAt: { type: Date, default: Date.now }
 
-const AdminSchema = new mongoose.Schema({
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: "users", required: true },
-    role: { type: String, enum: ["superadmin", "moderator"], required: true },
-    permissions: { type: [String] },
-    createdAt: { type: Date, default: Date.now }
   });
   
-  const Admin = mongoose.model("admin", AdminSchema);
-  module.exports=Admin
+  const Admin=mongoose.model('admin',AdminSchema);
+  
+  module.exports = Admin;

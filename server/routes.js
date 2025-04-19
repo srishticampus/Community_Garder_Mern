@@ -1,18 +1,17 @@
-const express = require("express");
-const {
-  createUser,
-  getAllUsers,
-  getUserById,
-  updateUser,
-  deleteUser,
-} = require("../controllers/userController");
+var express=require("express");
+var usercontroller=require("./Controllers/gardnercontroller");
+var admincontroller=require("./Controllers/Admincontroller");
+var orgcontroller=require("./Controllers/Organizationcontroller");
 
-const router = express.Router();
+var route=express.Router();
 
-router.post("/", createUser);
-router.get("/", getAllUsers);
-router.get("/:id", getUserById);
-router.put("/:id", updateUser);
-router.delete("/:id", deleteUser);
+route.post('/reguser',usercontroller.uploadimg,usercontroller.saveuser);
+route.post('/userlogin',usercontroller.loginvalidateuser);
 
-module.exports = router;
+route.post('/adminlogin',admincontroller.loginvalidateadmin);
+
+route.post('/regorg',orgcontroller.uploadimg,orgcontroller.saveorg);
+route.post('/orglogin',orgcontroller.loginvalidateorg);
+
+
+module.exports=route;
