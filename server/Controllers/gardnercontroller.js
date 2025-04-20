@@ -22,7 +22,10 @@ const savegardner = async (req, res) => {
     if (!profilePic) {
       return res.status(400).json({ message: "Profile picture is required" });
     }
-
+    const existinggardner = await gardner.findOne({ emailId: req.body.emailId });
+    if (existinggardner) {
+      return res.json({ message: "Email already exists" });
+    }
 
     // Hash the password before saving
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -46,11 +49,14 @@ const savegardner = async (req, res) => {
       yearofexperience: req.body.yearofexperience,
       availabletime: req.body.availabletime,
       preferedcrops: req.body.preferedcrops,
+      skills: req.body.skills,
+     
     });
 
     const result = await newGardner.save();
 
     res.status(200).json({
+      success: true,
       message: "Registered successfully",
       data: result,
     });
@@ -64,7 +70,6 @@ const savegardner = async (req, res) => {
 };
 
 const logingardner = async (req, res) => {
-  console.log(req.body);
   
     try {
       const { emailId, password } = req.body;
@@ -72,13 +77,13 @@ const logingardner = async (req, res) => {
       // Check if email exists
       const existingUser = await gardner.findOne({ emailId });
       if (!existingUser) {
-        return res.status(404).json({ message: "User not found" });
+        return res.json({ message: "User not found" });
       }
   
       // Compare password
       const isPasswordMatch = await bcrypt.compare(password, existingUser.password);
       if (!isPasswordMatch) {
-        return res.status(401).json({ message: "Invalid credentials" });
+        return res.json({ message: "Invalid password" });
       }
   
       // Successful login
@@ -127,6 +132,8 @@ const logingardner = async (req, res) => {
   };
 
   const updateGardnerById = async (req, res) => {
+    console.log(req.body);
+    
     try {
       const { id } = req.params;
       const updateData = req.body;
@@ -168,12 +175,36 @@ const logingardner = async (req, res) => {
     }
   };
   
+  const forgotGardnerPassword = async (req, res) => {
+    try {
+      const { emailId, password } = req.body;
+  
+      // Check if user exists
+      const existingUser = await gardner.findOne({ emailId });
+      if (!existingUser) {
+        return res.status(404).json({ message: "User not found" });
+      }
+  
+      // Hash new password
+      const hashedPassword = await bcrypt.hash(password, 10);
+  
+      // Update password
+      existingUser.password = hashedPassword;
+      await existingUser.save();
+  
+      res.status(200).json({ message: "Password updated successfully" });
+    } catch (error) {
+      console.error("Error updating password:", error);
+      res.status(500).json({ message: "Error updating password", error: error.message });
+    }
+  };
+  
   module.exports = {
     savegardner,
     uploadimg,
     logingardner,
     viewAllGardners,
     viewGardnerById,
-    updateGardnerById,
+    updateGardnerById,forgotGardnerPassword
   };
   

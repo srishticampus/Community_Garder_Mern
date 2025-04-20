@@ -1,18 +1,15 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import LandingNav from './landing/LandingNav'
+import axiosInstance from '../BaseAPI/axiosInstance'
 
 function LoginPage() {
   const [formData, setFormData] = useState({
-    email: '',
+    emailId: '',
     password: ''
   })
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    // Handle login logic here
-    console.log('Login form submitted:', formData)
-  }
+  const [errorMsg, setErrorMsg] = useState('')
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     setFormData({
@@ -21,22 +18,47 @@ function LoginPage() {
     })
   }
 
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setErrorMsg('') // Clear previous errors
+
+    try {
+      const response = await axiosInstance.post('/gardner/login', formData)
+
+      if (response.data.message === 'Login successful') {
+        localStorage.setItem('gardenerId', response.data.user.id)
+        alert('Login successful')
+        navigate('/gardener/home')
+      } else {
+        setErrorMsg(response.data.message)
+      }
+    } catch (error) {
+      console.error('Login error:', error)
+      setErrorMsg('Something went wrong. Please try again.')
+    }
+  }
+
   return (
     <div className="row justify-content-center">
-      <LandingNav/>
+      <LandingNav />
       <div className="col-md-6 mt-5 pt-5">
         <div className="card">
           <div className="card-body">
             <h2 className="text-center mb-4">Login</h2>
+
+            {errorMsg && (
+              <div className="alert alert-danger text-center">{errorMsg}</div>
+            )}
+
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
                 <label htmlFor="email" className="form-label">Email address</label>
                 <input
-                  type="email"
+                  type="emailId"
                   className="form-control"
                   id="email"
-                  name="email"
-                  value={formData.email}
+                  name="emailId"
+                  value={formData.emailId}
                   onChange={handleChange}
                   required
                 />
@@ -54,8 +76,8 @@ function LoginPage() {
                 />
               </div>
               <p className="text-center mt-3">
-               <Link to={"/gardener/forgetpassword"}>Forgot Your Password ?</Link>
-            </p>
+                <Link to={"/gardener/forgetpassword"}>Forgot Your Password ?</Link>
+              </p>
 
               <button type="submit" className="btn btn-success w-100">Login</button>
             </form>

@@ -1,18 +1,38 @@
-import React from "react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import LandingNav from "./LandingNav";
 
 function AdminLogin() {
+  const navigate = useNavigate();
+
+  const dummyEmail = "admin@gmail.com";
+  const dummyPassword = "Admin@123";
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log("Login form submitted:", formData);
+
+    const { email, password } = formData;
+
+    if (email === dummyEmail && password === dummyPassword) {
+      setSuccess("Login successful!");
+      setError("");
+      // Simulate successful login redirect
+      setTimeout(() => {
+        navigate("/admin/dashboard"); 
+        localStorage.setItem("adminId","adminId123")
+      }, 1000);
+    } else {
+      setError("Invalid email or password.");
+      setSuccess("");
+    }
   };
 
   const handleChange = (e) => {
@@ -20,6 +40,10 @@ function AdminLogin() {
       ...formData,
       [e.target.name]: e.target.value,
     });
+
+    // Clear messages while typing
+    setError("");
+    setSuccess("");
   };
 
   return (
@@ -28,7 +52,11 @@ function AdminLogin() {
       <div className="col-md-6 mt-5 pt-5">
         <div className="card">
           <div className="card-body">
-            <h2 className="text-center mb-4">Login</h2>
+            <h2 className="text-center mb-4">Admin Login</h2>
+
+            {error && <div className="alert alert-danger">{error}</div>}
+            {success && <div className="alert alert-success">{success}</div>}
+
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
                 <label htmlFor="email" className="form-label">
@@ -59,9 +87,9 @@ function AdminLogin() {
                 />
               </div>
 
-              <Link><button type="submit" className="btn btn-success w-100">
+              <button type="submit" className="btn btn-success w-100">
                 Login
-              </button></Link>
+              </button>
             </form>
           </div>
         </div>

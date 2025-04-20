@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 
-var UserSchema = mongoose.Schema({
+var ManagerSchema = mongoose.Schema({
   fullName: {
     type: String,
     required: true,
@@ -46,23 +46,11 @@ var UserSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
-  availabletime: {
-    type: String,
-    required: true,
-  },
-
-  preferedcrops: {
-    type: String,
-    required: true,
-  },
-  skills:{
-    type: String,
-    required: true,
-  },
+ 
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });
 
-const User = mongoose.model("users", UserSchema);
+const managers = mongoose.model("managers", ManagerSchema);
 
-module.exports = User;
+module.exports = managers;

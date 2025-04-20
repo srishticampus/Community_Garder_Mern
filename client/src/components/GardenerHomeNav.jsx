@@ -1,7 +1,12 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { FaUserCircle } from 'react-icons/fa'
 
 function GardenerHomeNav() {
+    const nav=useNavigate()
+    const handlelogout=()=>{
+        localStorage.removeItem("gardenerId")
+        nav("/login")
+    }
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-success fixed-top">
             <div className="container-fluid">
@@ -75,7 +80,7 @@ function GardenerHomeNav() {
                     <Link to="/gardener/profile" className='text-light me-3'> <FaUserCircle size={30} />
                     </Link>
 
-                    <button className="btn btn-danger">
+                    <button className="btn btn-danger" onClick={handlelogout}>
                         Logout
                     </button>
                 </div>

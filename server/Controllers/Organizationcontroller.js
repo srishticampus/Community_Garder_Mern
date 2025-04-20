@@ -27,18 +27,28 @@ const saveorg = async (req, res) => {
     } = req.body;
     const photo = req.file;
 
+    // Check for required photo
     if (!photo) {
-      return res
-        .status(400)
-        .json({ message: "Organization photo is required" });
+      return res.status(400).json({ message: "Organization photo is required" });
     }
 
+    // Password match check
     if (password !== confirmPass) {
       return res.status(400).json({ message: "Passwords do not match" });
     }
 
+    // 🔍 Check if email already exists
+    const existingOrg = await Organization.findOne({ emailId });
+    if (existingOrg) {
+      return res.status(409).json({
+        message: "Email already exists. Please use a different email.",
+      });
+    }
+
+    // Password hashing
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    // Save organization
     const org = new Organization({
       organizationName,
       organizationtype,
@@ -63,21 +73,23 @@ const saveorg = async (req, res) => {
     });
   } catch (error) {
     console.error("Error while registering organization:", error);
-    res
-      .status(500)
-      .json({ message: "Registration failed", error: error.message });
+    res.status(500).json({ message: "Registration failed", error: error.message });
   }
 };
 
+
 // Login Organization
 const loginvalidateorg = async (req, res) => {
+  console.log(req.body);
+
   try {
-    const { emailId, password } = req.body;
+    const emailId = req.body.email
+    const password = req.body.password
 
     const existingOrg = await Organization.findOne({ emailId });
 
     if (!existingOrg) {
-      return res.status(404).json({ message: "Organization not found" });
+      return res.json({ message: "Organization not found" });
     }
 
     const isPasswordValid = await bcrypt.compare(
@@ -85,10 +97,11 @@ const loginvalidateorg = async (req, res) => {
       existingOrg.password
     );
     if (!isPasswordValid) {
-      return res.status(401).json({ message: "Invalid credentials" });
+      return res.json({ message: "Invalid password" });
     }
 
     res.status(200).json({
+      success: true,
       message: "Login successful",
       data: {
         id: existingOrg._id,
@@ -103,49 +116,23 @@ const loginvalidateorg = async (req, res) => {
 };
 
 // ✅ View all organizations
-const getAllOrganizations = async (req, res) => {
-  try {
-    const organizations = await Organization.find();
-    res.status(200).json(organizations);
-  } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Error fetching organizations", error: error.message });
-  }
-};
-
-// ✅ View one organization by ID
-const getOrganizationById = async (req, res) => {
-  try {
-    const id = req.params.id;
-    const organization = await Organization.findById(id);
-
-    if (!organization) {
-      return res.status(404).json({ message: "Organization not found" });
-    }
-
-    res.status(200).json(organization);
-  } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Error fetching organization", error: error.message });
-  }
-};
-
-// ✅ Update organization by ID
 const updateOrganizationById = async (req, res) => {
   try {
     const id = req.params.id;
-    const updatedData = req.body;
+    const updatedData = { ...req.body };
 
+    // 🔒 Handle password update
     if (updatedData.password || updatedData.confirmPass) {
       if (updatedData.password !== updatedData.confirmPass) {
         return res.status(400).json({ message: "Passwords do not match" });
       }
-      updatedData.password = await bcrypt.hash(updatedData.password, 10);
+
+      const hashedPassword = await bcrypt.hash(updatedData.password, 10);
+      updatedData.password = hashedPassword;
+      updatedData.confirmPass = hashedPassword; // storing hashed confirmPass to match schema
     }
 
-    // Handle photo update if new file is uploaded
+    // 🖼️ Handle photo update if file uploaded (with Multer)
     if (req.file) {
       updatedData.photo = {
         filename: req.file.filename,
@@ -155,25 +142,74 @@ const updateOrganizationById = async (req, res) => {
       };
     }
 
-    const result = await Organization.findByIdAndUpdate(id, updatedData, {
+    const updatedOrganization = await Organization.findByIdAndUpdate(id, updatedData, {
       new: true,
+      runValidators: true,
     });
 
-    if (!result) {
+    if (!updatedOrganization) {
       return res.status(404).json({ message: "Organization not found" });
     }
 
     res.status(200).json({
       message: "Organization updated successfully",
-      data: result,
+      data: updatedOrganization,
     });
+
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Error updating organization", error: error.message });
+    res.status(500).json({
+      message: "Error updating organization",
+      error: error.message,
+    });
   }
 };
 
+const getAllOrganizations = async (req, res) => {
+  try {
+    const organizations = await Organization.find();
+    res.status(200).json({ message: "Organizations fetched successfully", data: organizations });
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching organizations", error: error.message });
+  }
+};
+
+// ✅ Get one organization by ID
+const getOrganizationById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await Organization.findById(id);
+
+    if (!result) {
+      return res.status(404).json({ message: "community not found" });
+    }
+
+    res.status(200).json(result);
+  } catch (error) {
+    console.error("Error fetching manager:", error);
+    res.status(500).json({ message: "Error retrieving manager", error: error.message });
+  }
+
+};
+
+const forgotOrganizationPassword = async (req, res) => {
+  try {
+    const { emailId, password } = req.body;
+
+    const user = await Organization.findOne({ emailId });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    user.password = hashedPassword;
+    await user.save();
+
+    res.status(200).json({ message: "Password updated successfully" });
+  } catch (error) {
+    console.error("Error updating password:", error);
+    res.status(500).json({ message: "Error updating password", error: error.message });
+  }
+};
 module.exports = {
   saveorg,
   uploadimg,
@@ -181,4 +217,5 @@ module.exports = {
   getAllOrganizations,
   getOrganizationById,
   updateOrganizationById,
+  forgotOrganizationPassword
 };
