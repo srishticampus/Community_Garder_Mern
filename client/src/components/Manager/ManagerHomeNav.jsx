@@ -1,9 +1,14 @@
 import React from 'react'
 import { FaUserCircle } from 'react-icons/fa'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { NavDropdown } from 'react-bootstrap';
 
 function ManagerHomeNav() {
+  const nav=useNavigate()
+      const handlelogout=()=>{
+          localStorage.removeItem("managerId")
+          nav("/manager/login")
+      }
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-success fixed-top">
@@ -84,7 +89,7 @@ function ManagerHomeNav() {
                           <Link to="/manager/profilepage" className='text-light me-3'> <FaUserCircle size={30} />
                           </Link>
       
-                          <button className="btn btn-danger">
+                          <button onClick={handlelogout} className="btn btn-danger">
                               Logout
                           </button>
                       </div>

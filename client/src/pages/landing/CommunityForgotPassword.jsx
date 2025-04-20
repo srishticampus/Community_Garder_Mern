@@ -1,25 +1,35 @@
-import React from "react";
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import axiosInstance from "../../BaseAPI/axiosInstance"; // Adjust path as needed
 import LandingNav from "./LandingNav";
 
 function CommunityForgotPassword() {
   const [formData, setFormData] = useState({
-    email: "",
+    emailId: "",
     password: "",
   });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle login logic here
-    console.log("Login form submitted:", formData);
-  };
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axiosInstance.post("/organization/forgot-password", formData);
+      if (res.data.message === "Password updated successfully") {
+        alert("Password has been updated!");
+        navigate("/Cammunity/Login"); // navigate to login
+      }
+    } catch (err) {
+      console.error("Forgot Password Error:", err);
+      alert(err?.response?.data?.message || "Failed to update password.");
+    }
   };
 
   return (
@@ -32,23 +42,19 @@ function CommunityForgotPassword() {
               <h2 className="text-center mb-4">Forgot Password</h2>
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
-                  <label htmlFor="email" className="form-label">
-                    Email address
-                  </label>
+                  <label htmlFor="emailId" className="form-label">Email address</label>
                   <input
                     type="email"
                     className="form-control"
-                    id="email"
-                    name="email"
-                    value={formData.email}
+                    id="emailId"
+                    name="emailId"
+                    value={formData.emailId}
                     onChange={handleChange}
                     required
                   />
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="password" className="form-label">
-                    Password
-                  </label>
+                  <label htmlFor="password" className="form-label">New Password</label>
                   <input
                     type="password"
                     className="form-control"
@@ -59,12 +65,9 @@ function CommunityForgotPassword() {
                     required
                   />
                 </div>
-
-                <Link to={"/Cammunity/Login"}>
-                  <button type="submit" className="btn btn-success w-100">
-                    Send
-                  </button>
-                </Link>
+                <button type="submit" className="btn btn-success w-100">
+                  Send
+                </button>
               </form>
             </div>
           </div>

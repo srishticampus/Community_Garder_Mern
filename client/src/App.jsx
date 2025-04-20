@@ -33,6 +33,8 @@ import CommunityProfileView from "./components/Community/CommunityProfileView";
 import CommunityEditProfile from "./components/Community/CommunityEditProfile";
 
 function App() {
+   const url = 'http://localhost:8080/upload'; 
+  
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
@@ -72,10 +74,10 @@ function App() {
         element={<CommunityForgotPassword />}
       />
       <Route path="/community/dashboard" element={<CommunityDashboard />} />
-      <Route path="/community/profileview" element={<CommunityProfileView/>} />
-      <Route path="/community/editprofile" element={<CommunityEditProfile />} />
+      <Route path="/community/profile" element={<CommunityProfileView url={url}/>} />
+      <Route path="/community/editprofile" element={<CommunityEditProfile url={url} />} />
       <Route path="/admin/login" element={<AdminLogin />} />
-      <Route path="/admin/home" element={<AdminHomePage/>} />
+      <Route path="/admin/dashboard" element={<AdminHomePage/>} />
       <Route path="/community/home" element={<CommunityHomePage />} />
     </Routes>
   );
