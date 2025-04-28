@@ -1,0 +1,38 @@
+.modal-header {
+    border-bottom: none;
+  }
+  
+  .modal-footer {
+    border-top: none;
+  }
+  
+  .btn-outline-primary {
+    color: #4CAF50;
+    border-color: #4CAF50;
+  }
+  
+  .btn-outline-primary:hover {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+  }
+  
+  .form-control:focus, 
+  .form-select:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
+  }
+  
+  .modal-content {
+    border-radius: 15px;
+    border: none;
+  }
+  
+  .btn-success {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+  }
+  
+  .btn-success:hover {
+    background-color: #45a049;
+    border-color: #45a049;
+  }

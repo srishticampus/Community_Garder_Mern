@@ -1,26 +1,25 @@
 import React from 'react'
 import {
-    Container,
-    Navbar,
-    Nav,
-    Button,
-    Row,
-    Col,
-    Card,
-  } from "react-bootstrap";
-  import { FaLeaf, FaTree, FaCut, FaMountain } from "react-icons/fa";
-  import "../../assets/css/Admin.css";
-  import ManagerHomeNav from "../Manager/ManagerHomeNav";
-  import gardner from '../../assets/gardenimg1.jpg'
+  Container,
+  Navbar,
+  Nav,
+  Button,
+  Row,
+  Col,
+  Card,
+} from "react-bootstrap";
+import { FaLeaf, FaTree, FaCut, FaMountain } from "react-icons/fa";
+import "../../assets/css/Admin.css";
+import ManagerHomeNav from "../Manager/ManagerHomeNav";
+import gardner from '../../assets/gardenimg1.jpg'
 import Footer from '../../pages/landing/Footer';
-  
+
 function ManagerHomePage() {
   return (
-      
-        <div>
+    <div>
       <div className="landscaping-home">
         {/* Navigation */}
-        <ManagerHomeNav/>
+        <ManagerHomeNav />
 
         {/* Hero Section */}
         <section className="hero-section">
@@ -39,7 +38,7 @@ function ManagerHomePage() {
                 <Button variant="outline-light">PROJECTS</Button>
               </div>
               <div className="architect-info">
-                
+
               </div>
             </div>
           </Container>
@@ -51,7 +50,7 @@ function ManagerHomePage() {
             <h2>We build, maintain and manage temporary community gardens.</h2>
             <h3>Services</h3>
             <p className="section-description">
-            We understand that managing a community garden is an administrative burden that takes time away from growing food and connecting with neighbours. That’s why we built Community Garden App! It’s a free, easy-to-use app that helps you manage your community garden, from planting to harvesting.
+              We understand that managing a community garden is an administrative burden that takes time away from growing food and connecting with neighbours. That’s why we built Community Garden App! It’s a free, easy-to-use app that helps you manage your community garden, from planting to harvesting.
             </p>
             <p>Our secure web platform offers a suite of digital tools to community garden managers—online payment, data collection and information management in one easy-to-use dashboard.</p>
             <p>Our community garden management platform makes it easy to sign up gardeners, collect fees online and track who’s registered and paid.</p>
@@ -64,7 +63,7 @@ function ManagerHomePage() {
                     <FaLeaf className="service-icon" />
                     <Card.Title>Maintenance</Card.Title>
                     <Card.Text>
-                     
+
                     </Card.Text>
                     <Button variant="link">Read more →</Button>
                   </Card.Body>
@@ -76,7 +75,7 @@ function ManagerHomePage() {
                     <FaTree className="service-icon" />
                     <Card.Title>Tree Care</Card.Title>
                     <Card.Text>
-                      
+
                     </Card.Text>
                     <Button variant="link">Read more →</Button>
                   </Card.Body>
@@ -88,7 +87,7 @@ function ManagerHomePage() {
                   <Card.Body>
                     <Card.Title>Pruning</Card.Title>
                     <Card.Text>
-                      
+
                     </Card.Text>
                     <Button variant="link">Read more →</Button>
                   </Card.Body>
@@ -100,7 +99,7 @@ function ManagerHomePage() {
                     <FaMountain className="service-icon" />
                     <Card.Title>Landscaping</Card.Title>
                     <Card.Text>
-                     
+
                     </Card.Text>
                     <Button variant="link">Read more →</Button>
                   </Card.Body>
@@ -124,7 +123,7 @@ function ManagerHomePage() {
                   <br />a work of <span className="text-warning">Art.</span>
                 </h3>
                 <p>
-                Community Garden Builders® is a Vancouver-based social enterprise with a mission to transform vacant property into temporary community gardens and growing spaces. Our projects represent a unique partnership between landowners and community members, providing much needed garden space for the community as well as interim property management for landowners. Using mobile garden beds set atop shipping pallets, we create accessible urban spaces for local community members to grow their own food and flowers.
+                  Community Garden Builders® is a Vancouver-based social enterprise with a mission to transform vacant property into temporary community gardens and growing spaces. Our projects represent a unique partnership between landowners and community members, providing much needed garden space for the community as well as interim property management for landowners. Using mobile garden beds set atop shipping pallets, we create accessible urban spaces for local community members to grow their own food and flowers.
                 </p>
                 <Button variant="warning">ABOUT US</Button>
               </Col>
@@ -193,12 +192,12 @@ function ManagerHomePage() {
                     className="img-fluid"
                   />
                   <img
-                    
+
                     alt="Project 3"
                     className="img-fluid"
                   />
                   <img
-                    
+
                     alt="Project 4"
                     className="img-fluid"
                   />
@@ -206,13 +205,13 @@ function ManagerHomePage() {
               </Col>
               <Col md={6} className="d-flex align-items-center">
                 <div className="project-content">
-                  <strong><h4 style={{color: "green"}}>PROJECTS</h4></strong>
+                  <strong><h4 style={{ color: "green" }}>PROJECTS</h4></strong>
                   <h3>
                     A peak of our landscape{" "}
                     <span className="text-warning">creations</span>
                   </h3>
                   <p>
-                  Decommissioned Temporary Community Garden Projects
+                    Decommissioned Temporary Community Garden Projects
                   </p>
                   <Button variant="outline-dark">PROJECTS</Button>
                 </div>
@@ -221,16 +220,8 @@ function ManagerHomePage() {
           </Container>
         </section>
       </div>
-<Footer/>
-      </div>
-
-
-     
-
-    
-      
-
-
+      <Footer />
+    </div>
   )
 }
 

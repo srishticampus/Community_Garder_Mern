@@ -1,6 +1,7 @@
 import LandingNav from './LandingNav'
 import Footer from './Footer'
 import { Link } from 'react-router-dom'
+import "../../assets/css/LandingPage.css"
 
 function LandingPage() {
   return (
@@ -8,7 +9,7 @@ function LandingPage() {
       <LandingNav />
       <main>
         {/* Hero Section */}
-        <section className="hero bg-success text-white text-center py-5 mt-5">
+        <section className=" text-white text-center py-5 mt-5" id='landing-Page'>
           <div className="container py-5">
             <h1 className="display-3 fw-bold">Welcome to Community Garden Connect</h1>
             <p className="lead fs-4 mb-4">
@@ -31,9 +32,20 @@ function LandingPage() {
             <h2 className="text-center mb-5">Why Choose Community Garden Connect?</h2>
             <div className="row g-4">
               <div className="col-md-4">
-                <div className="card h-100 border-0 shadow-sm">
+                <div className="card h-100 border-0  "id='community-card'>
                   <div className="card-body text-center">
                     <i className="bi bi-plant display-4 text-success mb-3"></i>
+                    <img 
+        src="src/assets/young-handsome-cheerful-gardener-smiling-watering-taking-care-plants.jpg" 
+        alt="Community Gardening" 
+        className="card-img-top mb-3"
+        style={{ 
+          width: '150px', 
+          height: '150px', 
+          objectFit: 'cover',
+          borderRadius: '50%'
+        }}
+      />
                     <h3>Garden Management</h3>
                     <p>Easily manage your garden plots and track your growing progress</p>
                   </div>
@@ -43,6 +55,17 @@ function LandingPage() {
                 <div className="card h-100 border-0 shadow-sm">
                   <div className="card-body text-center">
                     <i className="bi bi-people display-4 text-success mb-3"></i>
+                    <img 
+        src="src/assets/communitygarden.jpg" 
+        alt="Community Gardening" 
+        className="card-img-top mb-3"
+        style={{ 
+          width: '150px', 
+          height: '150px', 
+          objectFit: 'cover',
+          borderRadius: '50%'
+        }}
+      />
                     <h3>Community Building</h3>
                     <p>Connect with fellow gardeners and share knowledge</p>
                   </div>
@@ -52,6 +75,17 @@ function LandingPage() {
                 <div className="card h-100 border-0 shadow-sm">
                   <div className="card-body text-center">
                     <i className="bi bi-calendar-event display-4 text-success mb-3"></i>
+                    <img 
+        src="src/assets/EventGardening.jpg" 
+        alt="Community Gardening" 
+        className="card-img-top mb-3"
+        style={{ 
+          width: '150px', 
+          height: '150px', 
+          objectFit: 'cover',
+          borderRadius: '50%'
+        }}
+      />
                     <h3>Events & Workshops</h3>
                     <p>Participate in community events and learning opportunities</p>
                   </div>
@@ -68,7 +102,7 @@ function LandingPage() {
             <p className="lead mb-4">
               Join our community today and start your gardening journey
             </p>
-            <Link to="/signup" className="btn btn-success btn-lg">
+            <Link to="/signup" className="btn btn-success btn-lg text-white">
               Sign Up Now
             </Link>
           </div>
