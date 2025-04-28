@@ -1,0 +1,142 @@
+/* Global Colors */
+:root {
+    --primary-color: #4CAF50;
+    --primary-dark: #45a049;
+    --secondary-color: #2196F3;
+    --text-dark: #2c4c37;
+    --text-light: #666666;
+    --white: #ffffff;
+    --gray-light: #f8f9fa;
+    --gray-medium: #e9ecef;
+    --shadow: rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Typography */
+  body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-dark);
+    line-height: 1.6;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  
+  /* Card Styles */
+  .card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px var(--shadow);
+    transition: transform 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .card-header {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-radius: 15px 15px 0 0 !important;
+    padding: 1.5rem;
+  }
+  
+  /* Form Elements */
+  .form-control, .form-select {
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: 1px solid var(--gray-medium);
+    transition: all 0.3s ease;
+  }
+  
+  .form-control:focus, .form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
+  }
+  
+  /* Buttons */
+  .btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-success {
+    background-color: var(--primary-color);
+    border: none;
+  }
+  
+  .btn-success:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+  }
+  
+  .btn-outline-success {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+  }
+  
+  .btn-outline-success:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+  }
+  
+  /* Badges */
+  .badge {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+  
+  /* Progress Bars */
+  .progress {
+    height: 6px;
+    background-color: var(--gray-medium);
+    border-radius: 3px;
+    margin: 1rem 0;
+  }
+  
+  .progress-bar {
+    background-color: var(--primary-color);
+    border-radius: 3px;
+  }
+  
+  /* Image Containers */
+  .image-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px 15px 0 0;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .card {
+      margin: 1rem;
+    }
+  
+    .btn {
+      padding: 0.5rem 1rem;
+    }
+  
+    .image-container {
+      height: 200px;
+    }
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .fade-in {
+    animation: fadeIn 0.5s ease forwards;
+  }

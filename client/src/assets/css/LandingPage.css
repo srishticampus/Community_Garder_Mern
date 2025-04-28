@@ -1,0 +1,50 @@
+#landing-Page{
+    background-image: url("src/assets/plants-gardening-tools-close-up.jpg");
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 100px 0;
+}
+.features{
+    background-color: #cdd0d349;
+    padding: 50px 0;
+}
+
+
+/* card -styling */
+/* #community-card{
+    .community-card {
+        transition: transform 0.3s ease;
+        background: #faf8f8;
+      }
+      
+      .community-card:hover {
+        transform: translateY(-10px);
+      }
+      
+      .community-card .card-body {
+        padding: 2rem;
+      }
+      
+      .community-card .card-img-top {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+      
+      .community-card:hover .card-img-top {
+        transform: scale(1.05);
+      }
+      
+      .community-card h3 {
+        color: #2c4c37;
+        font-size: 1.5rem;
+        margin: 1rem 0;
+      }
+      
+      .community-card p {
+        color: #666;
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+
+} */
