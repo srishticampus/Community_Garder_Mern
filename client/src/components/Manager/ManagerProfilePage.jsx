@@ -3,7 +3,7 @@ import "../../assets/css/Manager.css";
 import ManagerHomeNav from './ManagerHomeNav';
 import axiosInstance from "../../BaseAPI/axiosInstance";
 
-const ManagerProfilePage = () => {
+const ManagerProfilePage = ({url}) => {
   const [profile, setProfile] = useState(null);
   const [editMode, setEditMode] = useState(false);
   const [error, setError] = useState("");

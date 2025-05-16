@@ -5,11 +5,11 @@
 
 .chat-container {
     display: flex;
-    height: calc(100vh - 60px);
+    height: 100vh;
     position: relative;
     background-color: #f5f7f9;
-    padding: 5rem;
-    overflow: hidden;
+    /* padding: 5rem; */
+    /* overflow: hidden; */
   }
   
   .chat-sidebar {
@@ -23,7 +23,7 @@
   
   .chat-sidebar h4 {
     color: #1ea74e;
-    margin-bottom: 20px;
+    margin-bottom: 2px;
     font-weight: 600;
   }
   
@@ -38,7 +38,7 @@
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
-    margin-bottom: 5px;
+    /* margin-bottom: 5px; */
   }
   
   .user-list li:hover {
@@ -49,14 +49,14 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    margin: 20px;
+    /* margin: 20px; */
     background: white;
     border-radius: 20px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.473);
   }
   
   .chat-header {
-    padding: 20px;
+    /* padding: 20px; */
     border-radius: 15px 15px 0 0;
   }
   
@@ -67,9 +67,10 @@
   
   .chat-body {
     flex: 1;
-    padding: 20px;
+    /* padding: 20px; */
     overflow-y: auto;
     background-color: #f8f9fa;
+    min-height: 270px;
   }
   
   .chat-bubble {
@@ -153,7 +154,7 @@
   
     .chat-main {
       margin: 10px;
-      height: calc(100vh - 200px);
+      min-height: 550px;
     }
   
     .chat-bubble {

@@ -40,28 +40,30 @@ function ManagerHomeNav() {
                   </li> */}
 
               <li className="nav-item">
-                <NavDropdown title="Gardens" id="basic-nav-dropdown" className="nav-link">
-                  <NavDropdown.Item as={Link} to="">View Gardens</NavDropdown.Item>
-                  <NavDropdown.Item as={Link} to="">Add Gardens</NavDropdown.Item>
-                  <NavDropdown.Item as={Link} to="">Edit Gardens</NavDropdown.Item>
-                  {/* <NavDropdown.Divider /> */}
+                <NavDropdown title="Garden" id="basic-nav-dropdown" className="nav-link">
+                  <NavDropdown.Item as={Link} to="/manager/view/garden">View Garden</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/manager/add/garden">Add Garden</NavDropdown.Item>
                 </NavDropdown>
-
               </li><li className="nav-item">
+
                 <NavDropdown title="Tasks" id="basic-nav-dropdown" className="nav-link">
                   <NavDropdown.Item as={Link} to="/manager/viewtask">View Task</NavDropdown.Item>
                   <NavDropdown.Item as={Link} to="/manager/addtask">Add Task</NavDropdown.Item>
-                  <NavDropdown.Item as={Link} to="/manager/edittask">Edit Task</NavDropdown.Item>
                 </NavDropdown>
 
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="">
+                <Link className="nav-link" to="/manager/view/gardners">
+                  Gardeners
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/manager/Chat">
                   Chat
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="">
+                <Link className="nav-link" to="/manager/view/resource">
                   resources
                 </Link>
               </li>

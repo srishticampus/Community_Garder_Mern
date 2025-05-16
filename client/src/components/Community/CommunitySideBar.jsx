@@ -3,6 +3,7 @@ import { FaUsers, FaUserTie, FaBox, FaHome } from 'react-icons/fa';
 import { Button } from 'react-bootstrap';
 import "../../assets/css/CommunityDashboard.css";
 import { Link, useNavigate } from 'react-router-dom';
+import { FaBook, FaChevronDown, FaSeedling, FaCalendarAlt, FaTools } from 'react-icons/fa';
 
 function CommunitySidebar() {
      const nav=useNavigate()
@@ -33,9 +34,17 @@ function CommunitySidebar() {
           </li>
           <li className="nav-item mb-2">
             <span className="nav-link active text-white d-flex align-items-center">
-              <Link  className='text-decoration-none text-light' to="/community/profile"><FaUserTie className="me-2" /> Profile</Link>
+              <Link  className='text-decoration-none text-light' to="/community/profileview"><FaUserTie className="me-2" /> Profile</Link>
             </span>
           </li>
+           <li className="nav-item mb-2">
+            <span className="nav-link active text-white d-flex align-items-center">
+              <Link  className='text-decoration-none text-light' to="/community/resourseview"> <FaBook className="me-2" />Resourse </Link>
+            </span>
+          </li>
+            
+      {/* New Resource Dropdown */}
+      
           {/* <li className="nav-item mb-2">
             <Button
               style={{ backgroundColor: '#28a745', border: 'none' }}

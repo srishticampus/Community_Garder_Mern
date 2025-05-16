@@ -1,0 +1,59 @@
+.admin-navbar {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.349);
+  height: 70px;
+}
+
+.brand-icon {
+  margin-right: 8px;
+  color: #28a745;
+}
+
+.nav-icon {
+  margin-right: 6px;
+  font-size: 16px;
+}
+
+.navbar-brand {
+  font-size: 1.4rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem !important;
+  margin: 0 0.2rem;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+  transform: translateY(-2px);
+}
+
+@media (max-width: 991px) {
+  .nav-link {
+    padding: 0.5rem 0 !important;
+    margin: 0.2rem 0;
+  }
+  
+  .logout-btn {
+    margin-top: 1rem;
+    width: 100%;
+    justify-content: center;
+  }
+}

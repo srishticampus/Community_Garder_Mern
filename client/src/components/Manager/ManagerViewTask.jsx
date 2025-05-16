@@ -1,103 +1,80 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import { Container, Card, Table, Badge, Button } from 'react-bootstrap';
-import { useState } from 'react';
-import "../../assets/css/TaskForm.css"
+import "../../assets/css/TaskForm.css";
 import ManagerHomeNav from './ManagerHomeNav';
 import { Link } from 'react-router-dom';
+import axios from '../../BaseAPI/axiosInstance';
 
 function ManagerViewTask() {
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      taskType: 'planting',
-      title: 'Plant Spring Flowers',
-      description: 'Plant new seasonal flowers in the front garden',
-      assignedTo: 'John Smith',
-      dueDate: '2024-04-15',
-      priority: 'high',
-      status: 'pending'
-    }
-  ]);
+  const [tasks, setTasks] = useState([]);
+  const managerId = localStorage.getItem("managerId"); // assuming you're storing it here
 
-  const [showEditModal, setShowEditModal] = useState(false);
-  const [editingTask, setEditingTask] = useState(null);
+  useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        const response = await axios.get(`/task/manager/${managerId}`);
+        setTasks(response.data.data); // make sure the backend returns `data`
+      } catch (error) {
+        console.error("Error fetching tasks:", error);
+      }
+    };
 
-  const handleEditClick = (task) => {
-    setEditingTask(task);
-    setShowEditModal(true);
-  };
-
-  const handleEditSave = () => {
-    setTasks(tasks.map(task => 
-      task.id === editingTask.id ? editingTask : task
-    ));
-    setShowEditModal(false);
-  };
-
+    fetchTasks();
+  }, [managerId]);
 
   return (
-    <div>
-          <div className="view-task-page">
-      <ManagerHomeNav/>
+    <div className="view-task-page">
+      <ManagerHomeNav />
       <Container className="view-tasks-container">
-      <Card className="tasks-card">
-        <Card.Header className="text-center bg-success text-white">
-          <h2>Garden Tasks Overview</h2>
-        </Card.Header>
-        <Card.Body>
-          <div className="table-responsive">
-            <Table hover className="tasks-table">
-              <thead>
-                <tr>
-                  <th>Task Type</th>
-                  
-                  <th>Description</th>
-                  <th>Assigned To</th>
-                  <th>Due Date</th>
-                 
-                  <th>Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {tasks.map(task => (
-                  <tr key={task.id}>
-                    <td>{task.taskType}</td>
-                    
-                    <td>{task.description}</td>
-                    <td>{task.assignedTo}</td>
-                    <td>{task.dueDate}</td>
-                   
-                    <td>
-                      <Badge bg={task.status === 'completed' ? 'success' : 
-                        task.status === 'pending' ? 'warning' : 'info'}>
-                        {task.status}
-                      </Badge>
-                    </td>
-                    <td>
-                      <Link to={"/manager/edittask"} ><Button 
-                        variant="outline-primary" 
-                        size="sm"
-                        onClick={() => handleEditClick(task)}
-                      >
-                        Edit
-                      </Button></Link>
-                    </td>
+        <Card className="tasks-card">
+          <Card.Header className="text-center bg-success text-white">
+            <h2>Garden Tasks Overview</h2>
+          </Card.Header>
+          <Card.Body>
+            <div className="table-responsive">
+              <Table hover className="tasks-table">
+                <thead>
+                  <tr>
+                    <th>Task</th>
+                    <th>Description</th>
+                    <th>Assigned To</th>
+                    <th>Due Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
                   </tr>
-                ))}
-              </tbody>
-            </Table>
-          </div>
-        </Card.Body>
-      </Card>
-
-      {/* Edit Task Modal */}
-    </Container>
-
-
-</div>
+                </thead>
+                <tbody>
+                  {tasks.map(task => (
+                    <tr key={task._id}>
+                      <td>{task.title}</td>
+                      <td>{task.description}</td>
+                      <td>{task.gardenerId.fullName || "Unknown"}</td> {/* update based on your data */}
+                      <td>{new Date(task.dueDate).toLocaleDateString()}</td>
+                      <td>
+                        <Badge bg={
+                          task.status === 'completed' ? 'success' :
+                          task.status === 'pending' ? 'warning' : 'info'
+                        }>
+                          {task.status}
+                        </Badge>
+                      </td>
+                      <td>
+                        <Link to={`/manager/edittask/${task._id}`}>
+                          <Button variant="outline-primary" size="sm">
+                            Edit
+                          </Button>
+                        </Link>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </div>
+          </Card.Body>
+        </Card>
+      </Container>
     </div>
-  )
+  );
 }
 
-export default ManagerViewTask
+export default ManagerViewTask;

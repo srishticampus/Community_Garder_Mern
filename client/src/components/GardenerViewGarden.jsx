@@ -1,47 +1,38 @@
-import React from 'react'
-import '../assets/css/garderner.css'
-import GardenerHomeNav from './GardenerHomeNav'
+import React, { useState, useEffect } from 'react';
+import axios from '../BaseAPI/axiosInstance';
+import '../assets/css/garderner.css';
+import GardenerHomeNav from './GardenerHomeNav';
+import { Card } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
-const gardenPlots = [
-  {
-    id: 1,
-    name: 'Plot A1',
-    size: '10x10 ft',
-    crop: 'Tomatoes',
-    status: 'Active',
-    image: '/images/plot1.jpg',
-  },
-  {
-    id: 2,
-    name: 'Plot B2',
-    size: '8x12 ft',
-    crop: 'Spinach',
-    status: 'In Progress',
-    image: '/images/plot2.jpg',
-  },
-  {
-    id: 3,
-    name: 'Plot C3',
-    size: '12x12 ft',
-    crop: 'Carrots',
-    status: 'Harvested',
-    image: '/images/plot3.jpg',
-  },
-  {
-    id: 4,
-    name: 'Plot D4',
-    size: '15x10 ft',
-    crop: 'Peppers',
-    status: 'Available',
-    image: '/images/plot4.jpg',
-  },
-]
+function GardenerViewGarden({url}) {
+  const [plots, setPlots] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const gardenerId = localStorage.getItem("gardenerId");
 
-function GardenerViewGarden() {
+  useEffect(() => {
+    fetchPlots();
+  }, []);
+
+  const fetchPlots = async () => {
+    try {
+      const response = await axios.get('/gardener/'+gardenerId);
+      setPlots(response.data.data);
+      setLoading(false);
+    } catch (err) {
+      setError('Failed to fetch plots');
+      setLoading(false);
+    }
+  };
+
+  if (loading) return <div className="text-center mt-5">Loading...</div>;
+  if (error) return <div className="text-center text-danger mt-5">{error}</div>;
+
   return (
     <div className="garden-plot-view">
-        <GardenerHomeNav/>
-      {/* Hero Section */}
+      <GardenerHomeNav />
+
       <div className="gardenergardenhero-section">
         <div className="hero-content text-white text-center">
           <h1>🌿 Garden Plot Overview</h1>
@@ -49,49 +40,58 @@ function GardenerViewGarden() {
         </div>
       </div>
 
-      {/* Plot Cards */}
-      <div className="container my-5">
+      <div className="container my-5" style={{minHeight:'80vh'}}>
         <div className="row">
-          {gardenPlots.map((plot) => (
-            <div className="col-md-6 col-lg-4 mb-4" key={plot.id}>
-              <div className="card plot-card shadow-sm">
-                <img
-                  src={plot.image}
-                  className="card-img-top"
+          {plots.map((plot) => (
+            <div className="col-md-6 col-lg-4 mb-4" key={plot._id || plot.id}>
+              <Card className="plot-card shadow-sm">
+                <Card.Img
+                  src={`${url}/${plot.image.filename}`}
                   alt={plot.name}
                   style={{ height: '200px', objectFit: 'cover' }}
                 />
-                <div className="card-body">
-                  <h5 className="card-title">{plot.name}</h5>
-                  <p className="card-text">
-                    <strong>Size:</strong> {plot.size} <br />
-                    <strong>Crop:</strong> {plot.crop} <br />
-                    <strong>Status:</strong>{' '}
-                    <span
-                      className={`badge ${
-                        plot.status === 'Active'
-                          ? 'bg-success'
-                          : plot.status === 'Available'
-                          ? 'bg-primary'
-                          : plot.status === 'Harvested'
-                          ? 'bg-secondary'
-                          : 'bg-warning text-dark'
-                      }`}
-                    >
-                      {plot.status}
-                    </span>
-                  </p>
-                  <button className="btn btn-outline-success w-100 mt-2">
-                    View Details
-                  </button>
-                </div>
-              </div>
+                <Card.Body>
+                  <Card.Title>{plot.name}</Card.Title>
+                  <div className="plot-info">
+                    <p><strong>Size: </strong> {plot.size}</p>
+                    <p><strong>Plot Name: </strong> {plot.plotName}</p>
+                    <p><strong>Location: </strong> {plot.location}</p>
+                  </div>
+
+                  <div className="garden-details">
+                    <div className="detail-item">
+                      <i className="bi bi-geo-alt"></i>
+                      <span>{plot.region}</span>
+                    </div>
+                    <div className="detail-item">
+                      <i className="bi bi-rulers"></i>
+                      <span>{plot.assignedPlot}</span>
+                    </div>
+                    <div className="detail-item">
+                      <i className="bi bi-person"></i>
+                      <span>{plot.mainGardener}</span>
+                    </div>
+                    <div className="detail-item">
+                     <Link to="/gardener/chat">Chat</Link>
+                    </div>
+                  </div>
+
+                  <Card.Text className="garden-description">
+                    {plot.description}
+                  </Card.Text>
+                </Card.Body>
+              </Card>
             </div>
           ))}
+          {plots.length === 0 && (
+            <div className="col-12 text-center">
+              <p>No plots found.</p>
+            </div>
+          )}
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default GardenerViewGarden
+export default GardenerViewGarden;
