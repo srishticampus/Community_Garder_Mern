@@ -1,59 +1,88 @@
-import React from 'react'
-import '../../assets/css/garderner.css'
-import GardenerHomeNav from '../../components/GardenerHomeNav'
+import React, { useEffect, useState } from 'react';
+import '../../assets/css/garderner.css';
+import GardenerHomeNav from '../../components/GardenerHomeNav';
+import axiosInstance from '../../BaseAPI/axiosInstance';
+import { Button, Alert, Spinner } from 'react-bootstrap';
 
-const events = [
-    {
-        id: 1,
-        title: 'Organic Gardening Workshop',
-        date: 'April 20, 2025',
-        time: '10:00 AM - 1:00 PM',
-        location: 'Green Community Center, Trivandrum',
-        image: '/event1.jpg',
-        description: 'Join us for a hands-on workshop to learn the basics of organic gardening. Beginners welcome!',
-        organizer: 'Community Garden Team',
-    },
-    {
-        id: 2,
-        title: 'Seed Exchange & Awareness Meetup',
-        date: 'May 5, 2025',
-        time: '2:00 PM - 5:00 PM',
-        location: 'Urban Garden Plot 3, Kochi',
-        image: '/event2.jpg',
-        description: 'Bring your seeds, plants, or cuttings and exchange with fellow gardeners. Let’s grow together!',
-        organizer: 'EcoSwap Community Volunteers',
-    }
-]
+const EventView = ({url}) => {
+    const [events, setEvents] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [message, setMessage] = useState('');
+    const userId = localStorage.getItem("gardenerId"); // Make sure this is stored during login
 
-const EventView = () => {
+    // Fetch events on component mount
+    const fetchEvents = async () => {
+        try {
+            const res = await axiosInstance.get("/event/upcoming");
+            setEvents(res.data);
+        } catch (err) {
+            console.error("Error fetching events", err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchEvents();
+    }, []);
+
+    // Register for event
+    const handleRegister = async (eventId) => {
+        try {
+            const res = await axiosInstance.post(`/event/register/${eventId}`, { userId });
+            alert(res.data.message || "Registered successfully!");
+        } catch (err) {
+            console.error("Registration error", err);
+            if (err.response?.data?.message) {
+                alert(err.response.data.message);
+            } else {
+                setMessage("Error registering for the event.");
+            }
+        }
+
+        // Remove message after a few seconds
+        setTimeout(() => setMessage(''), 4000);
+    };
+
     return (
         <div>
-            <GardenerHomeNav/>
+            <GardenerHomeNav />
             <div className="container mt-5 pt-4">
                 <h2 className="text-success text-center mb-4">🌿 Upcoming Events</h2>
-                <div className="row">
-                    {events.map((event) => (
-                        <div key={event.id} className="col-md-6 mb-4">
-                            <div className="card shadow-sm h-100 event-card">
-                                <img src={event.image} className="card-img-top" alt={event.title} />
-                                <div className="card-body">
-                                    <h5 className="card-title">{event.title}</h5>
-                                    <p className="card-text">{event.description}</p>
-                                    <ul className="list-unstyled mb-2">
-                                        <li><strong>📅 Date:</strong> {event.date}</li>
-                                        <li><strong>⏰ Time:</strong> {event.time}</li>
-                                        <li><strong>📍 Location:</strong> {event.location}</li>
-                                        <li><strong>👤 Organizer:</strong> {event.organizer}</li>
-                                    </ul>
-                                    <button className="btn btn-outline-success">View More</button>
+
+                {message && <Alert variant="info" className="text-center">{message}</Alert>}
+
+                {loading ? (
+                    <div className="text-center"><Spinner animation="border" /></div>
+                ) : (
+                    <div className="row">
+                        {events.length > 0 ? (
+                            events.map((event) => (
+                                <div key={event._id} className="col-md-4 mb-4">
+                                    <div className="card shadow-sm h-100 event-card">
+                                        <img style={{height:"250px"}} src={`${url}/${event.image.filename}`} className="card-img-top" alt={event.title} />
+                                        <div className="card-body">
+                                            <h5 className="card-title">{event.eventName}</h5>
+                                            <p className="card-text">{event.description}</p>
+                                            <ul className="list-unstyled mb-2">
+                                                <li><strong>📅 Date:</strong> {event.startDate?.slice(0, 10)}</li>
+                                                <li><strong>⏰ Time:</strong> {event.time || "Not specified"}</li>
+                                                <li><strong>📍 Location:</strong> {event.venue}</li>
+                                                <li><strong>👤 Organizer:</strong> {event.organizer || "Community Team"}</li>
+                                            </ul>
+                                            <Button variant="outline-success" onClick={() => handleRegister(event._id)}>Register</Button>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
+                            ))
+                        ) : (
+                            <p className="text-center text-muted">No upcoming events available.</p>
+                        )}
+                    </div>
+                )}
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default EventView
+export default EventView;

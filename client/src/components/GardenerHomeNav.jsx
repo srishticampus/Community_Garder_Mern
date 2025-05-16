@@ -1,9 +1,9 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { FaUserCircle } from 'react-icons/fa'
-
+import { NavDropdown } from 'react-bootstrap'
 function GardenerHomeNav() {
-    const nav=useNavigate()
-    const handlelogout=()=>{
+    const nav = useNavigate()
+    const handlelogout = () => {
         localStorage.removeItem("gardenerId")
         nav("/login")
     }
@@ -25,22 +25,14 @@ function GardenerHomeNav() {
 
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                        {/* <li className="nav-item">
-              <Link className="nav-link" to="/gardening-details">
-                Gardening Details
-              </Link>
-            </li> */}
-                        {/* <li className="nav-item">
-              <Link className="nav-link" to="/about">
-                About Us
-              </Link>
-            </li> */}
 
                         <li className="nav-item">
                             <Link className="nav-link" to="/gardener/viewgarden">
                                 Garden
                             </Link>
-                        </li><li className="nav-item">
+                        </li>
+                        <li className="nav-item">
+
                             <Link className="nav-link" to="/gardener/viewtask">
                                 Task
                             </Link>
@@ -51,6 +43,7 @@ function GardenerHomeNav() {
                                 Chat
                             </Link>
                         </li>
+
                         <li className="nav-item">
                             <Link className="nav-link" to="/gardener/viewresource">
                                 resources

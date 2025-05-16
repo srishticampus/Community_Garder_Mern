@@ -1,27 +1,13 @@
 const mongoose = require("mongoose");
 
 const GardenPlotSchema = new mongoose.Schema({
-  gardenId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Garden",
-    required: true,
-  },
-  plotNumber: { type: String, required: true },
-  gardenerId: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
-  plantingSchedule: {
-    cropType: String,
-    plantingDate: Date,
-    estimatedHarvest: Date,
-  },
-  maintenanceTasks: { type: [String] },
-  harvestRecords: [{ crop: String, quantity: Number, harvestDate: Date }],
-  status: {
-    type: String,
-    enum: ["available", "assigned", "inactive"],
-    required: true,
-  },
+   plotName: { type: String, required: true },
+  location: { type: String, required: true },
+  size: { type: String, required: true },
+  managerId: { type: String, required: true },
+  assignedGardeners: [{ type: mongoose.Schema.Types.ObjectId, ref: "users" }],
+  image: { type: Object,required:true },
   createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: Date.now },
 });
-const GardenPlot = mongoose.model("GardenPlot", GardenPlotSchema);
-module.exports = GardenPlot;
+
+module.exports = mongoose.model("gardenplots", GardenPlotSchema);

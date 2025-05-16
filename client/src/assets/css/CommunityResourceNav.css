@@ -1,0 +1,68 @@
+
+
+.community-navbar {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav-logo {
+  height: 30px;
+  margin-right: 10px;
+}
+
+.notification-icon,
+.message-icon {
+  position: relative;
+  padding: 0.5rem 1rem;
+}
+
+.notification-badge,
+.message-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 0.7rem;
+  padding: 0.25rem 0.4rem;
+}
+
+.profile-link {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-nav .nav-link {
+  color: rgba(255, 255, 255, 0.9) !important;
+  transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  color: white !important;
+}
+
+.btn-outline-light {
+  border-width: 2px;
+}
+
+.btn-outline-light:hover {
+  background-color: white;
+  color: #198754;
+}
+
+@media (max-width: 991px) {
+  .notification-icon,
+  .message-icon {
+    padding: 0.5rem 0;
+  }
+  
+  .notification-badge,
+  .message-badge {
+    right: -5px;
+  }
+  
+  .profile-link {
+    margin: 0.5rem 0;
+  }
+  
+  .btn-outline-light {
+    margin: 0.5rem 0;
+  }
+}
