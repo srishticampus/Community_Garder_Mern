@@ -45,21 +45,21 @@ function ManagerViewTask() {
                 </thead>
                 <tbody>
                   {tasks.map(task => (
-                    <tr key={task._id}>
-                      <td>{task.title}</td>
-                      <td>{task.description}</td>
-                      <td>{task.gardenerId.fullName || "Unknown"}</td> {/* update based on your data */}
-                      <td>{new Date(task.dueDate).toLocaleDateString()}</td>
+                    <tr key={task?._id}>
+                      <td>{task?.title}</td>
+                      <td>{task?.description}</td>
+                      <td>{task?.gardenerId?.fullName || "Unknown"}</td> {/* update based on your data */}
+                      <td>{new Date(task?.dueDate).toLocaleDateString()}</td>
                       <td>
                         <Badge bg={
-                          task.status === 'completed' ? 'success' :
-                          task.status === 'pending' ? 'warning' : 'info'
+                          task?.status === 'completed' ? 'success' :
+                          task?.status === 'pending' ? 'warning' : 'info'
                         }>
-                          {task.status}
+                          {task?.status}
                         </Badge>
                       </td>
                       <td>
-                        <Link to={`/manager/edittask/${task._id}`}>
+                        <Link to={`/manager/edittask/${task?._id}`}>
                           <Button variant="outline-primary" size="sm">
                             Edit
                           </Button>

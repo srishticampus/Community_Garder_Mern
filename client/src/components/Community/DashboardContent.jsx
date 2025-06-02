@@ -58,7 +58,7 @@ const DashboardContent = () => {
           <Card style={cardStyle} className="text-center shadow">
             <Card.Body>
               <h5>Managers</h5>
-              <div className="display-6">{counts.managers}</div>
+              <div className="display-6">{counts?.managers}</div>
               <FaUserTie size={30} />
             </Card.Body>
           </Card>
@@ -68,7 +68,7 @@ const DashboardContent = () => {
           <Card style={cardStyle} className="text-center shadow">
             <Card.Body>
               <h5>All Users</h5>
-              <div className="display-6">{counts.users}</div>
+              <div className="display-6">{counts?.users}</div>
               <FaUsers size={30} />
             </Card.Body>
           </Card>
@@ -78,7 +78,7 @@ const DashboardContent = () => {
           <Card style={cardStyle} className="text-center shadow">
             <Card.Body>
               <h5>Organizations</h5>
-              <div className="display-6">{counts.organizations}</div>
+              <div className="display-6">{counts?.organizations}</div>
               <FaUserTie size={30} />
             </Card.Body>
           </Card>
@@ -88,7 +88,7 @@ const DashboardContent = () => {
           <Card style={cardStyle} className="text-center shadow">
             <Card.Body>
               <h5>Gardens</h5>
-              <div className="display-6">{counts.gardens}</div>
+              <div className="display-6">{counts?.gardens}</div>
               <FaUserTie size={30} />
             </Card.Body>
           </Card>
@@ -98,7 +98,7 @@ const DashboardContent = () => {
           <Card style={cardStyle} className="text-center shadow">
             <Card.Body>
               <h5>Events</h5>
-              <div className="display-6">{counts.events}</div>
+              <div className="display-6">{counts?.events}</div>
               <FaBox size={30} />
             </Card.Body>
           </Card>
@@ -108,7 +108,7 @@ const DashboardContent = () => {
           <Card style={cardStyle} className="text-center shadow">
             <Card.Body>
               <h5>Resources</h5>
-              <div className="display-6">{counts.resources}</div>
+              <div className="display-6">{counts?.resources}</div>
               <FaBox size={30} />
             </Card.Body>
           </Card>

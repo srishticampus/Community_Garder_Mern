@@ -86,17 +86,17 @@ function Gardnerchat() {
       <div className="chat-sidebar mt-5">
         <h5 className="text-center">🌱 Your Plots</h5>
         <ul className="list-group">
-          {plotList.map((plot) => (
+          {plotList?.map((plot) => (
             <li
-              key={plot._id}
-              className={`list-group-item ${selectedPlotId === plot._id ? 'active' : ''}`}
+              key={plot?._id}
+              className={`list-group-item ${selectedPlotId === plot?._id ? 'active' : ''}`}
               onClick={() => {
-                setSelectedPlotId(plot._id)
-                localStorage.setItem("plotId", plot._id)
+                setSelectedPlotId(plot?._id)
+                localStorage.setItem("plotId", plot?._id)
               }}
               style={{ cursor: "pointer" }}
             >
-              {plot.plotName || "Plot"}
+              {plot?.plotName || "Plot"}
             </li>
           ))}
         </ul>
@@ -108,12 +108,12 @@ function Gardnerchat() {
         </div>
 
         <div className="chat-body">
-          {messages.length === 0 ? (
+          {messages?.length === 0 ? (
             <p className="text-center text-muted">No messages yet.</p>
           ) : (
             messages.map((msg, i) => (
-              <div key={i} className={`chat-bubble ${msg.isMe ? 'me' : 'other'}`}>
-                <p>{msg.text}</p>
+              <div key={i} className={`chat-bubble ${msg?.isMe ? 'me' : 'other'}`}>
+                <p>{msg?.text}</p>
               </div>
             ))
           )}

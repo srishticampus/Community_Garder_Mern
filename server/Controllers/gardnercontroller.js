@@ -12,10 +12,10 @@ const storage = multer.diskStorage({
 const uploadimg = multer({ storage: storage }).single("profilePic");
 
 const savegardner = async (req, res) => {
-  console.log(req.body);
-  console.log(req.file);
+  // console.log(req.body);
+  // console.log(req.file);
   try {
-    console.log(req.body);
+    // console.log(req.body);
 
     const profilePic = req.file;
 
@@ -132,7 +132,7 @@ const viewGardnerById = async (req, res) => {
 };
 
 const updateGardnerById = async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
 
   try {
     const { id } = req.params;

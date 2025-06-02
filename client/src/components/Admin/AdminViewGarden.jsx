@@ -41,26 +41,26 @@ function AdminViewGarden({ url }) {
         <h2 className="headding-div text-center mb-4"> Garden Plots</h2>
         <Row xs={1} md={2} lg={3} className="g-4">
           {plots.map((plot) => (
-            <Col key={plot._id}>
+            <Col key={plot?._id}>
               <Card className="item-card">
                 <div className="item-image-container">
                   <Card.Img
                     variant="top"
-                    src={plot.image ? `${url}/${plot.image.filename}` : "/images/placeholder.jpg"}
+                    src={plot?.image ? `${url}/${plot?.image?.filename}` : "/images/placeholder.jpg"}
                     className="item-image"
                   />
                   <Badge bg="info" className="category-badge">
-                    Assigned Gardeners: {plot.assignedGardeners.length}
+                    Assigned Gardeners: {plot?.assignedGardeners?.length}
                   </Badge>
                 </div>
 
                 <Card.Body>
                   <div className="item-header">
-                    <Card.Title>{plot.plotName}</Card.Title>
-                    <span className="price">Size: {plot.size}</span>
+                    <Card.Title>{plot?.plotName}</Card.Title>
+                    <span className="price">Size: {plot?.size}</span>
                   </div>
                   <Card.Text className="description">
-                    📍 Location: {plot.location}
+                    📍 Location: {plot?.location}
                   </Card.Text>
                   
                 </Card.Body>

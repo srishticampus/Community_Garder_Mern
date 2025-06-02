@@ -62,19 +62,19 @@ function GardenerViewTask() {
               </tr>
             </thead>
             <tbody>
-              {taskData.length > 0 ? (
+              {taskData?.length > 0 ? (
                 taskData.map((task, index) => (
-                  <tr key={task._id}>
+                  <tr key={task?._id}>
                     <td>{index + 1}</td>
-                    <td>{task.title}</td>
-                    <td>{task.description}</td>
-                    <td>{task.dueDate?.split("T")[0]}</td>
+                    <td>{task?.title}</td>
+                    <td>{task?.description}</td>
+                    <td>{task?.dueDate?.split("T")[0]}</td>
                     <td>
                       <select
                         className="form-select"
-                        value={task.status}
+                        value={task?.status}
                         onChange={(e) =>
-                          handleStatusChange(task._id, e.target.value)
+                          handleStatusChange(task?._id, e.target.value)
                         }
                       >
                         <option value="Pending">Pending</option>

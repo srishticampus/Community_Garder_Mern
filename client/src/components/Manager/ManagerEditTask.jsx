@@ -119,11 +119,11 @@ function ManagerEditTask() {
                 <Form.Label>Task Type</Form.Label>
                 <Form.Select
                   name="taskType"
-                  value={taskData.taskType}
+                  value={taskData?.taskType}
                   onChange={handleChange}
                   required
                 >
-                  <option value={taskData.taskType}>Select Task Type</option>
+                  <option value={taskData?.taskType}>Select Task Type</option>
                   {["planting", "watering", "pruning", "fertilizing", "weeding", "maintenance"].map(type => (
                     <option key={type} value={type}>{type.charAt(0).toUpperCase() + type.slice(1)}</option>
                   ))}
@@ -135,7 +135,7 @@ function ManagerEditTask() {
                 <Form.Control
                   type="text"
                   name="title"
-                  value={taskData.title}
+                  value={taskData?.title}
                   onChange={handleChange}
                   required
                 />
@@ -147,7 +147,7 @@ function ManagerEditTask() {
                   as="textarea"
                   rows={3}
                   name="description"
-                  value={taskData.description}
+                  value={taskData?.description}
                   onChange={handleChange}
                   required
                 />
@@ -198,7 +198,7 @@ function ManagerEditTask() {
                 <Form.Control
                   type="date"
                   name="dueDate"
-                  value={taskData.dueDate}
+                  value={taskData?.dueDate}
                   onChange={handleChange}
                   required
                 />

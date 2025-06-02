@@ -4,6 +4,7 @@ import { NavDropdown } from 'react-bootstrap'
 function GardenerHomeNav() {
     const nav = useNavigate()
     const handlelogout = () => {
+        alert("please login again")
         localStorage.removeItem("gardenerId")
         nav("/login")
     }

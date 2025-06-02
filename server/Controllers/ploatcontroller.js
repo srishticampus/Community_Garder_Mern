@@ -71,7 +71,7 @@ exports.ViewallGardenPlot = async (req, res) => {
       return res.status(404).json({ success: false, message: "No garden plots found" });
     }
 
-    console.log(plots, "plots");
+    // console.log(plots, "plots");
 
     res.status(200).json({ success: true, data: plots });
   } catch (err) {

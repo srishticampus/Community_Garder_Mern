@@ -46,30 +46,30 @@ function GardenerViewGarden({url}) {
             <div className="col-md-6 col-lg-4 mb-4" key={plot._id || plot.id}>
               <Card className="plot-card shadow-sm">
                 <Card.Img
-                  src={`${url}/${plot.image.filename}`}
-                  alt={plot.name}
+                  src={`${url}/${plot?.image?.filename}`}
+                  alt={plot?.name}
                   style={{ height: '200px', objectFit: 'cover' }}
                 />
                 <Card.Body>
-                  <Card.Title>{plot.name}</Card.Title>
+                  <Card.Title>{plot?.name}</Card.Title>
                   <div className="plot-info">
-                    <p><strong>Size: </strong> {plot.size}</p>
-                    <p><strong>Plot Name: </strong> {plot.plotName}</p>
-                    <p><strong>Location: </strong> {plot.location}</p>
+                    <p><strong>Size: </strong> {plot?.size}</p>
+                    <p><strong>Plot Name: </strong> {plot?.plotName}</p>
+                    <p><strong>Location: </strong> {plot?.location}</p>
                   </div>
 
                   <div className="garden-details">
                     <div className="detail-item">
                       <i className="bi bi-geo-alt"></i>
-                      <span>{plot.region}</span>
+                      <span>{plot?.region}</span>
                     </div>
                     <div className="detail-item">
                       <i className="bi bi-rulers"></i>
-                      <span>{plot.assignedPlot}</span>
+                      <span>{plot?.assignedPlot}</span>
                     </div>
                     <div className="detail-item">
                       <i className="bi bi-person"></i>
-                      <span>{plot.mainGardener}</span>
+                      <span>{plot?.mainGardener}</span>
                     </div>
                     <div className="detail-item">
                      <Link to="/gardener/chat">Chat</Link>
@@ -77,13 +77,13 @@ function GardenerViewGarden({url}) {
                   </div>
 
                   <Card.Text className="garden-description">
-                    {plot.description}
+                    {plot?.description}
                   </Card.Text>
                 </Card.Body>
               </Card>
             </div>
           ))}
-          {plots.length === 0 && (
+          {plots?.length === 0 && (
             <div className="col-12 text-center">
               <p>No plots found.</p>
             </div>
