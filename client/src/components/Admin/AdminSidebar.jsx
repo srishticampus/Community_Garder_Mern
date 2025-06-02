@@ -18,6 +18,8 @@ import {
 function AdminSidebar() {
   const nav = useNavigate();
   const handlelogout = () => {
+    alert("please login again")
+
     localStorage.removeItem("adminId");
     nav("/admin/Login");
   };
@@ -68,7 +70,7 @@ function AdminSidebar() {
             <span className="nav-link active text-white d-flex align-items-center">
               <Link className="text-decoration-none text-light" to="/admin/view/garden">
                 {" "}
-                <FaLeaf  className="me-2" />
+                <FaLeaf className="me-2" />
                 Garden{" "}
               </Link>
             </span>
@@ -77,7 +79,7 @@ function AdminSidebar() {
             <span className="nav-link active text-white d-flex align-items-center">
               <Link className="text-decoration-none text-light" to="/admin/view/organization">
                 {" "}
-                <GoOrganization  className="me-2" />
+                <GoOrganization className="me-2" />
                 Organization{" "}
               </Link>
             </span>

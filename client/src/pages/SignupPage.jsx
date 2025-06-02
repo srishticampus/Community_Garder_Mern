@@ -51,7 +51,7 @@ function SignupPage() {
     setFormData((prev) => ({ ...prev, [name]: newValue }));
     validateField(name, newValue);
   };
-const navigate=useNavigate()
+  const navigate = useNavigate()
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -169,9 +169,18 @@ const navigate=useNavigate()
 
                 <div className="col-md-6 mb-3">
                   <label>Skills</label>
-                  <input className="form-control" type="text" name="skills" value={formData.skills} onChange={handleChange} />
+                  <select className="form-select" name="skills" value={formData.skills} onChange={handleChange}>
+                    <option value="">Select a skill</option>
+                    <option value="planting">Planting</option>
+                    <option value="watering">Watering</option>
+                    <option value="pruning">Pruning</option>
+                    <option value="fertilizing">Fertilizing</option>
+                    <option value="weeding">Weeding</option>
+                    <option value="maintenance">General Maintenance</option>
+                  </select>
                   {errors.skills && <small className="text-danger">{errors.skills}</small>}
                 </div>
+
 
                 <div className="col-md-6 mb-3">
                   <label>Availability</label>

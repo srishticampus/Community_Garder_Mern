@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 function ManagerAddTask() {
   const [taskData, setTaskData] = useState({
     title: '',
-    taskType: '', // ✅ Added taskType
+    taskType: '',
     description: '',
     dueDate: '',
     gardenerId: '',
@@ -18,15 +18,15 @@ function ManagerAddTask() {
 
   const [plots, setPlots] = useState([]);
   const [gardeners, setGardeners] = useState([]);
-
   const managerId = localStorage.getItem("managerId");
+  const navigate = useNavigate();
 
   // ✅ Fetch Plots Assigned to This Manager
   useEffect(() => {
     const fetchPlots = async () => {
       try {
         const res = await axios.get(`/manager/${managerId}`);
-        setPlots(res.data.data); // Make sure the API returns assigned plots
+        setPlots(res.data.data); // Should return assigned plots
       } catch (error) {
         console.error("Failed to fetch plots:", error.message);
       }
@@ -48,7 +48,7 @@ function ManagerAddTask() {
     };
     fetchGardeners();
   }, [taskData.plotId]);
-const navigate=useNavigate()
+
   // ✅ Handle Form Submission
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -59,9 +59,7 @@ const navigate=useNavigate()
     try {
       const res = await axios.post("/createtask", finalData);
       alert("Task Created Successfully!");
-      navigate("/manager/viewtask")
-      console.log(res.data);
-      // Optionally reset form
+      navigate("/manager/viewtask");
       setTaskData({
         title: '',
         taskType: '',
@@ -74,6 +72,21 @@ const navigate=useNavigate()
     } catch (error) {
       console.error("Task creation failed:", error.response?.data || error.message);
       alert("Failed to create task");
+    }
+  };
+
+  // ✅ Reorder gardeners based on selected taskType
+  const handleTaskTypeChange = (selectedType) => {
+    setTaskData((prev) => ({ ...prev, taskType: selectedType }));
+    if (taskData.plotId && gardeners.length > 0) {
+      const reordered = [...gardeners].sort((a, b) => {
+        const aHasSkill = a.skills?.includes(selectedType);
+        const bHasSkill = b.skills?.includes(selectedType);
+        if (aHasSkill && !bHasSkill) return -1;
+        if (!aHasSkill && bHasSkill) return 1;
+        return 0;
+      });
+      setGardeners(reordered);
     }
   };
 
@@ -102,7 +115,7 @@ const navigate=useNavigate()
                 <Form.Select
                   name="taskType"
                   value={taskData.taskType}
-                  onChange={(e) => setTaskData({ ...taskData, taskType: e.target.value })}
+                  onChange={(e) => handleTaskTypeChange(e.target.value)}
                   required
                 >
                   <option value="">Select Task Type</option>
@@ -130,7 +143,9 @@ const navigate=useNavigate()
                 <Form.Label>Plot</Form.Label>
                 <Form.Select
                   value={taskData.plotId}
-                  onChange={(e) => setTaskData({ ...taskData, plotId: e.target.value, gardenerId: '' })}
+                  onChange={(e) =>
+                    setTaskData({ ...taskData, plotId: e.target.value, gardenerId: '' })
+                  }
                   required
                 >
                   <option value="">Select Plot</option>
@@ -153,7 +168,7 @@ const navigate=useNavigate()
                   <option value="">Select Gardener</option>
                   {gardeners.map((gardener) => (
                     <option key={gardener._id} value={gardener._id}>
-                      {gardener.fullName}
+                      {gardener.fullName} {gardener.skills?.includes(taskData.taskType) ? '🌟' : ''}
                     </option>
                   ))}
                 </Form.Select>

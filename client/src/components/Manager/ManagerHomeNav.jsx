@@ -6,6 +6,9 @@ import { NavDropdown } from 'react-bootstrap';
 function ManagerHomeNav() {
   const nav = useNavigate()
   const handlelogout = () => {
+
+            alert("please login again")
+
     localStorage.removeItem("managerId")
     nav("/manager/login")
   }
@@ -52,17 +55,17 @@ function ManagerHomeNav() {
                 </NavDropdown>
 
               </li>
-              <li className="nav-item">
+              <li className="nav-item mt-2">
                 <Link className="nav-link" to="/manager/view/gardners">
                   Gardeners
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className="nav-item mt-2">
                 <Link className="nav-link" to="/manager/Chat">
                   Chat
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className="nav-item mt-2">
                 <Link className="nav-link" to="/manager/view/resource">
                   resources
                 </Link>

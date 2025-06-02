@@ -8,6 +8,8 @@ import { FaBook, FaChevronDown, FaSeedling, FaCalendarAlt, FaTools } from 'react
 function CommunitySidebar() {
      const nav=useNavigate()
           const handlelogout=()=>{
+                    alert("please login again")
+
               localStorage.removeItem("orgId")
               nav("/Cammunity/Login")
           }
