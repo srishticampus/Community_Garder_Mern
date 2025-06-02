@@ -33,8 +33,8 @@ function AdminViewResources({url}) {
                 <Card className="resource-card">
                   <div className="resource-image-wrapper">
                     <img
-                      src={`${url}/${resource.photo.filename}`} // ⚠️ Adjust if path is different
-                      alt={resource.name}
+                      src={`${url}/${resource?.photo?.filename}`} // ⚠️ Adjust if path is different
+                      alt={resource?.name}
                       className="resource-image"
                     />
                   </div>
@@ -42,18 +42,18 @@ function AdminViewResources({url}) {
                   <Card.Body>
                     <div className="resource-name d-flex align-items-center">
                       <FaBox className="icon me-2" />
-                      <h5 className="mb-0">{resource.resourceName}</h5>
+                      <h5 className="mb-0">{resource?.resourceName}</h5>
                     </div>
 
                     <div className="resource-info">
                       <Badge bg="success" className="type-badge me-2">
                         <FaLeaf className="badge-icon me-1" />
-                        {resource.resourceType}
+                        {resource?.resourceType}
                       </Badge>
 
                       <div className="quantity-info d-flex align-items-center">
                         <FaHashtag className="icon me-2" />
-                        <span>Quantity: {resource.quantity}</span>
+                        <span>Quantity: {resource?.quantity}</span>
                       </div>
                     </div>
                   </Card.Body>

@@ -104,7 +104,7 @@ function ManagerAddTask() {
                 <Form.Label>Task Title</Form.Label>
                 <Form.Control
                   type="text"
-                  value={taskData.title}
+                  value={taskData?.title}
                   onChange={(e) => setTaskData({ ...taskData, title: e.target.value })}
                   required
                 />
@@ -114,7 +114,7 @@ function ManagerAddTask() {
                 <Form.Label>Task Type</Form.Label>
                 <Form.Select
                   name="taskType"
-                  value={taskData.taskType}
+                  value={taskData?.taskType}
                   onChange={(e) => handleTaskTypeChange(e.target.value)}
                   required
                 >
@@ -133,7 +133,7 @@ function ManagerAddTask() {
                 <Form.Control
                   as="textarea"
                   rows={3}
-                  value={taskData.description}
+                  value={taskData?.description}
                   onChange={(e) => setTaskData({ ...taskData, description: e.target.value })}
                   required
                 />
@@ -142,7 +142,7 @@ function ManagerAddTask() {
               <Form.Group className="mb-3">
                 <Form.Label>Plot</Form.Label>
                 <Form.Select
-                  value={taskData.plotId}
+                  value={taskData?.plotId}
                   onChange={(e) =>
                     setTaskData({ ...taskData, plotId: e.target.value, gardenerId: '' })
                   }
@@ -151,7 +151,7 @@ function ManagerAddTask() {
                   <option value="">Select Plot</option>
                   {plots.map((plot) => (
                     <option key={plot._id} value={plot._id}>
-                      {plot.plotName || `Plot ${plot._id}`}
+                      {plot?.plotName || `Plot ${plot._id}`}
                     </option>
                   ))}
                 </Form.Select>
@@ -160,15 +160,15 @@ function ManagerAddTask() {
               <Form.Group className="mb-3">
                 <Form.Label>Assign to Gardener</Form.Label>
                 <Form.Select
-                  value={taskData.gardenerId}
+                  value={taskData?.gardenerId}
                   onChange={(e) => setTaskData({ ...taskData, gardenerId: e.target.value })}
                   required
-                  disabled={!taskData.plotId}
+                  disabled={!taskData?.plotId}
                 >
                   <option value="">Select Gardener</option>
                   {gardeners.map((gardener) => (
-                    <option key={gardener._id} value={gardener._id}>
-                      {gardener.fullName} {gardener.skills?.includes(taskData.taskType) ? '🌟' : ''}
+                    <option key={gardener?._id} value={gardener?._id}>
+                      {gardener?.fullName} {gardener?.skills?.includes(taskData?.taskType) ? '🌟' : ''}
                     </option>
                   ))}
                 </Form.Select>
@@ -178,7 +178,7 @@ function ManagerAddTask() {
                 <Form.Label>Due Date</Form.Label>
                 <Form.Control
                   type="date"
-                  value={taskData.dueDate}
+                  value={taskData?.dueDate}
                   onChange={(e) => setTaskData({ ...taskData, dueDate: e.target.value })}
                   required
                 />

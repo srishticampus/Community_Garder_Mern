@@ -34,8 +34,8 @@ function CommunityEditResource({ url }) {
         quantity: data.quantity
       });
 
-      if (data.photo?.filename) {
-        setPreview(`${url}/${data.photo.filename}`);
+      if (data?.photo?.filename) {
+        setPreview(`${url}/${data?.photo?.filename}`);
       }
     } catch (error) {
       console.error("Error fetching resource:", error);
@@ -126,7 +126,7 @@ function CommunityEditResource({ url }) {
                 <Form.Control
                   type="text"
                   name="resourceName"
-                  value={formData.resourceName}
+                  value={formData?.resourceName}
                   onChange={handleChange}
                   required
                 />
@@ -136,7 +136,7 @@ function CommunityEditResource({ url }) {
                 <Form.Label>Resource Type</Form.Label>
                 <Form.Select
                   name="resourceType"
-                  value={formData.resourceType}
+                  value={formData?.resourceType}
                   onChange={handleChange}
                   required
                 >
@@ -153,7 +153,7 @@ function CommunityEditResource({ url }) {
                 <Form.Control
                   type="number"
                   name="quantity"
-                  value={formData.quantity}
+                  value={formData?.quantity}
                   onChange={handleChange}
                   required
                 />

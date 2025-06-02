@@ -72,14 +72,14 @@ function ManagerChat() {
         <h4>🌾Your Plots</h4>
         <ul className="user-list"  onClick={()=>{setShow(true)}}>
           {plots.map((plot) => (
-            <li key={plot._id} onClick={() => handlePlotSelect(plot)} className={selectedPlot?._id === plot._id ? "active" : ""}>
-              <strong>{plot.plotName}</strong><br />
+            <li key={plot?._id} onClick={() => handlePlotSelect(plot)} className={selectedPlot?._id === plot?._id ? "active" : ""}>
+              <strong>{plot?.plotName}</strong><br />
               {
                 show==true ?  <div>
               Gardeners:
               <ul>
-                {plot.assignedGardeners.map(g => (
-                  <li key={g._id}>{g.fullName}</li>
+                {plot?.assignedGardeners.map(g => (
+                  <li key={g?._id}>{g?.fullName}</li>
                 ))}
               </ul></div>:""
               }
@@ -92,14 +92,14 @@ function ManagerChat() {
       <div className="chat-main mt-5">
         <div className="chat-header bg-success text-white">
           <h5>💬 Chat with Gardeners</h5>
-          {selectedPlot && <p>Plot: {selectedPlot.plotName}</p>}
+          {selectedPlot && <p>Plot: {selectedPlot?.plotName}</p>}
         </div>
 
         <div className="chat-body">
           {messages.map((msg, i) => (
-            <div key={i} className={`chat-bubble ${msg.isMe ? "me" : "other"}`}>
-              <p>{msg.text}</p>
-              <small>{msg.sender}</small>
+            <div key={i} className={`chat-bubble ${msg?.isMe ? "me" : "other"}`}>
+              <p>{msg?.text}</p>
+              <small>{msg?.sender}</small>
             </div>
           ))}
         </div>

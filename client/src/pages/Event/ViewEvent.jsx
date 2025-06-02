@@ -73,7 +73,7 @@ function ViewEvent({url}) {
         <div className="row">
           {events.length > 0 ? (
             events.map((event) => (
-              <div key={event._id} className="col-md-4 mb-4">
+              <div key={event?._id} className="col-md-4 mb-4">
                 <Card className="shadow-sm h-100 event-card">
                   <Card.Img
                   style={{height:"250px"}}
@@ -82,13 +82,13 @@ function ViewEvent({url}) {
                     alt={event.eventName}
                   />
                   <Card.Body>
-                    <Card.Title>{event.eventName}</Card.Title>
-                    <Card.Text>{event.description}</Card.Text>
+                    <Card.Title>{event?.eventName}</Card.Title>
+                    <Card.Text>{event?.description}</Card.Text>
                     <ul className="list-unstyled mb-2">
-                      <li><strong>📅 Start Date:</strong> {event.startDate?.slice(0, 10)}</li>
-                      <li><strong>📅 End Date:</strong> {event.endDate?.slice(0, 10)}</li>
-                      <li><strong>📍 Venue:</strong> {event.venue}</li>
-                      <li><strong>📌 Type:</strong> {event.eventType}</li>
+                      <li><strong>📅 Start Date:</strong> {event?.startDate?.slice(0, 10)}</li>
+                      <li><strong>📅 End Date:</strong> {event?.endDate?.slice(0, 10)}</li>
+                      <li><strong>📍 Venue:</strong> {event?.venue}</li>
+                      <li><strong>📌 Type:</strong> {event?.eventType}</li>
                     </ul>
                     <Button variant="outline-primary" className="me-2" onClick={() => openEditModal(event)}>Edit</Button>
                     <Button variant="outline-danger" onClick={() => handleDelete(event._id)}>Delete</Button>
@@ -112,27 +112,27 @@ function ViewEvent({url}) {
           <Form>
             <Form.Group className="mb-3">
               <Form.Label>Event Name</Form.Label>
-              <Form.Control type="text" name="eventName" value={editData.eventName || ''} onChange={handleEditChange} />
+              <Form.Control type="text" name="eventName" value={editData?.eventName || ''} onChange={handleEditChange} />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Start Date</Form.Label>
-              <Form.Control type="date" name="startDate" value={editData.startDate?.slice(0, 10) || ''} onChange={handleEditChange} />
+              <Form.Control type="date" name="startDate" value={editData?.startDate?.slice(0, 10) || ''} onChange={handleEditChange} />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>End Date</Form.Label>
-              <Form.Control type="date" name="endDate" value={editData.endDate?.slice(0, 10) || ''} onChange={handleEditChange} />
+              <Form.Control type="date" name="endDate" value={editData?.endDate?.slice(0, 10) || ''} onChange={handleEditChange} />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Venue</Form.Label>
-              <Form.Control type="text" name="venue" value={editData.venue || ''} onChange={handleEditChange} />
+              <Form.Control type="text" name="venue" value={editData?.venue || ''} onChange={handleEditChange} />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Event Type</Form.Label>
-              <Form.Control type="text" name="eventType" value={editData.eventType || ''} onChange={handleEditChange} />
+              <Form.Control type="text" name="eventType" value={editData?.eventType || ''} onChange={handleEditChange} />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Description</Form.Label>
-              <Form.Control as="textarea" name="description" value={editData.description || ''} onChange={handleEditChange} />
+              <Form.Control as="textarea" name="description" value={editData?.description || ''} onChange={handleEditChange} />
             </Form.Group>
           </Form>
         </Modal.Body>

@@ -45,31 +45,31 @@ function CommunityResourseView({ url }) {
               <Card className="resource-card h-100">
                 <div className="resource-image-wrapper">
                   <img 
-                    src={`${url}/${resource.photo.filename}`} 
+                    src={`${url}/${resource?.photo?.filename}`} 
                     alt={resource.resourceName}
                     className="resource-image"
                   />
                 </div>
                 <Card.Body>
-                  <Card.Title className="resource-title">{resource.resourceName}</Card.Title>
+                  <Card.Title className="resource-title">{resource?.resourceName}</Card.Title>
                   <div className="resource-info">
                     <div className="info-item">
                       <FaList className="info-icon" />
-                      <Badge bg="success">{resource.resourceType}</Badge>
+                      <Badge bg="success">{resource?.resourceType}</Badge>
                     </div>
                     <div className="info-item">
                       <FaHashtag className="info-icon" />
-                      <span>Quantity: {resource.quantity}</span>
+                      <span>Quantity: {resource?.quantity}</span>
                     </div>
                   </div>
                   <div className="resource-actions mt-3">
-                    <Link to={`/community/resource/edit/${resource._id}`}>
+                    <Link to={`/community/resource/edit/${resource?._id}`}>
                       <Button variant="success" className="me-2 w-100 submit-btn">Edit</Button>
                     </Link>
                     <Button
                       variant="danger"
                       className="w-100 submit-btn"
-                      onClick={() => handleDelete(resource._id)}
+                      onClick={() => handleDelete(resource?._id)}
                     >
                       Delete
                     </Button>

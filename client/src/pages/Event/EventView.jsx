@@ -56,19 +56,19 @@ const EventView = ({url}) => {
                     <div className="text-center"><Spinner animation="border" /></div>
                 ) : (
                     <div className="row">
-                        {events.length > 0 ? (
+                        {events?.length > 0 ? (
                             events.map((event) => (
-                                <div key={event._id} className="col-md-4 mb-4">
+                                <div key={event?._id} className="col-md-4 mb-4">
                                     <div className="card shadow-sm h-100 event-card">
-                                        <img style={{height:"250px"}} src={`${url}/${event.image.filename}`} className="card-img-top" alt={event.title} />
+                                        <img style={{height:"250px"}} src={`${url}/${event?.image?.filename}`} className="card-img-top" alt={event.title} />
                                         <div className="card-body">
-                                            <h5 className="card-title">{event.eventName}</h5>
-                                            <p className="card-text">{event.description}</p>
+                                            <h5 className="card-title">{event?.eventName}</h5>
+                                            <p className="card-text">{event?.description}</p>
                                             <ul className="list-unstyled mb-2">
-                                                <li><strong>📅 Date:</strong> {event.startDate?.slice(0, 10)}</li>
-                                                <li><strong>⏰ Time:</strong> {event.time || "Not specified"}</li>
-                                                <li><strong>📍 Location:</strong> {event.venue}</li>
-                                                <li><strong>👤 Organizer:</strong> {event.organizer || "Community Team"}</li>
+                                                <li><strong>📅 Date:</strong> {event?.startDate?.slice(0, 10)}</li>
+                                                <li><strong>⏰ Time:</strong> {event?.time || "Not specified"}</li>
+                                                <li><strong>📍 Location:</strong> {event?.venue}</li>
+                                                <li><strong>👤 Organizer:</strong> {event?.organizer || "Community Team"}</li>
                                             </ul>
                                             <Button variant="outline-success" onClick={() => handleRegister(event._id)}>Register</Button>
                                         </div>
