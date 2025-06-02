@@ -67,7 +67,7 @@ const saveManager = async (req, res) => {
 
 // Login Manager
 const loginManager = async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   
   try {
     const emailId=req.body.email

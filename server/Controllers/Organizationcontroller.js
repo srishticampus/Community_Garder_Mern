@@ -80,7 +80,7 @@ const saveorg = async (req, res) => {
 
 // Login Organization
 const loginvalidateorg = async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
 
   try {
     const emailId = req.body.email

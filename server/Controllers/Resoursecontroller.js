@@ -26,7 +26,7 @@ exports.addResource = async (req, res) => {
       quantity,
       photo,
     });
-console.log(newResource,"newResource");
+// console.log(newResource,"newResource");
 
     await newResource.save();
     res.status(201).json({ message: 'Resource added successfully', data: newResource });
