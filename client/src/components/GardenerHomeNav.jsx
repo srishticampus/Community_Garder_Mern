@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { FaUserCircle } from 'react-icons/fa'
+import { FaRobot, FaUserCircle } from 'react-icons/fa'
 import { NavDropdown } from 'react-bootstrap'
 function GardenerHomeNav() {
     const nav = useNavigate()
@@ -54,6 +54,12 @@ function GardenerHomeNav() {
                                 Events
                             </Link>
                         </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/chatbot">
+                               <FaRobot/> <small>Chat Bot</small>
+                            </Link>
+                        </li>
+
                         {/* <li className="nav-item">
               <Link className="nav-link" to="/contact">
                 Contact Us
@@ -69,8 +75,7 @@ function GardenerHomeNav() {
               placeholder="Search"
               aria-label="Search"
             />
-          </form> */}
-
+          </form> */} 
                     <Link to="/gardener/profile" className='text-light me-3'> <FaUserCircle size={30} />
                     </Link>
 

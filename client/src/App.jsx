@@ -47,6 +47,7 @@ import AdminViewOrganization from "./components/Admin/AdminViewOrganization";
 import AdminViewResources from "./components/Admin/AdminViewResources";
 import ManagerViewResources from "./components/Manager/ManagerViewResources";
 import ManagerViewGardeners from "./components/Manager/ManagerViewGardeners";
+import ChatBot from "./components/chatbot/ChatBot";
 
 function App() {
   const url = "http://localhost:8080/upload";
@@ -63,6 +64,8 @@ function App() {
       {/* gardener */}
 
       <Route path="/gardener/home" element={<GardenerHome />} />
+            <Route path="/chatbot" element={<ChatBot />} />
+
       <Route
         path="/gardener/viewgarden"
         element={<GardenerViewGarden url={url} />}
@@ -88,7 +91,7 @@ function App() {
         element={<ManagerForgetPassword />}
       />
       <Route path="/manager/home" element={<ManagerHomePage />} />
-      <Route path="/manager/profilepage" element={<ManagerProfilePage url={url}/>} />
+      <Route path="/manager/profilepage" element={<ManagerProfilePage url={url} />} />
       <Route path="/manager/edit/profile" element={<ManagerEditProfile />} />
       <Route path="/manager/viewtask" element={<ManagerViewTask />} />
       <Route path="/manager/addtask" element={<ManagerAddTask />} />
@@ -146,9 +149,9 @@ function App() {
         path="/admin/view/organization"
         element={<AdminViewOrganization url={url} />}
       />
-      <Route path="/admin/view/resource" element={<AdminViewResources url={url}/>} />
- <Route path="/manager/view/resource" element={<ManagerViewResources url={url}/>} />
-  <Route path="/manager/view/gardners" element={<ManagerViewGardeners url={url}/>} />
+      <Route path="/admin/view/resource" element={<AdminViewResources url={url} />} />
+      <Route path="/manager/view/resource" element={<ManagerViewResources url={url} />} />
+      <Route path="/manager/view/gardners" element={<ManagerViewGardeners url={url} />} />
 
       {/* admin */}
     </Routes>
