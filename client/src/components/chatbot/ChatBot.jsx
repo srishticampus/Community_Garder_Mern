@@ -51,8 +51,8 @@ function ChatBot() {
   return (
     <div>
         <GardenerHomeNav/>
-      <div className="container my-4">
-        <h1 className="text-center mb-4">Chatbot</h1>
+      <div className="container my-5">
+        <h3 className="text-center text-success mb-4 mt-5 pt-4">Chatbot</h3>
 
         <div className="card shadow-sm">
           <div className="card-body">
