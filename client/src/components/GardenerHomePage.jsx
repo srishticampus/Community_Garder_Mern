@@ -6,11 +6,13 @@ import compost from '../assets/compost.jpg'
 import Watering from '../assets/watering.jpg'
 import soil from '../assets/soil.jpg'
 import Footer from '../pages/landing/Footer'
+import { FaComments } from 'react-icons/fa'; // or any chatbot-style icon you prefer
+
 
 function GardenerHome() {
   return (
     <div className="gardener-home">
-        <GardenerHomeNav/>
+      <GardenerHomeNav />
       {/* Hero Banner */}
       <section className="gardenerhomehero-section  text-white text-center d-flex align-items-center justify-content-center">
         <div className="overlay"></div>
@@ -23,7 +25,7 @@ function GardenerHome() {
 
       {/* Scrolling Section */}
       <section className="container my-5">
-        <h2 className="text-center mb-4">🌱 Gardening Tips</h2>
+        <h2 className="text-center mb-4">🌱Gardening Tips</h2>
         <div className="row overflow-auto scroll-section">
           <div className="col-md-4 mb-3">
             <div className="card h-100">
@@ -58,7 +60,7 @@ function GardenerHome() {
       {/* Events Section */}
       <section className="bg-light py-5">
         <div className="container">
-          <h2 className="text-center mb-4">🌼 Upcoming Garden Events</h2>
+          <h2 className="text-center mb-4">🌼Upcoming Garden Events</h2>
           <div className="row overflow-auto scroll-section">
             <div className="col-md-6 mb-3">
               <div className="card">
@@ -81,7 +83,8 @@ function GardenerHome() {
           </div>
         </div>
       </section>
-      <Footer/>
+      
+      <Footer />
     </div>
   )
 }
