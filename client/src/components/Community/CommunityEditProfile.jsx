@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import CommunitySidebar from "./CommunitySideBar";
+import CommunitySidebar from "./CommunityViewGardeners";
 import axiosInstance from "../../BaseAPI/axiosInstance";
+import CommunityResourceNav from "./CommunityResourceNav";
 
 function CommunityEditProfile({ url }) {
   const [profile, setProfile] = useState({
@@ -74,7 +75,7 @@ function CommunityEditProfile({ url }) {
 
       await axiosInstance.post(`/organization/profileedit/${id}`, formData);
       alert("Profile updated successfully!");
-      navigate("/community/profile");
+      navigate("/community/profileview");
     } catch (error) {
       console.error("Error updating profile:", error);
       alert("Failed to update profile.");
@@ -86,11 +87,11 @@ function CommunityEditProfile({ url }) {
       <div className="row">
         {/* Sidebar */}
         <div className="col-md-3 p-0">
-          <CommunitySidebar />
+          <CommunityResourceNav />
         </div>
 
         {/* Edit Profile Form */}
-        <div className="col-md-9 p-4">
+        <div className="">
           <div className="text-muted mb-2">Community / Edit Profile</div>
           <h2 className="mb-4 text-success">Edit Profile</h2>
 

@@ -21,12 +21,23 @@ function ManagerAddTask() {
   const managerId = localStorage.getItem("managerId");
   const navigate = useNavigate();
 
+  // ✅ Reorder gardeners by skill match
+  const reorderGardenersBySkill = (gardenersList, taskType) => {
+    return [...gardenersList].sort((a, b) => {
+      const aHasSkill = a.skills?.includes(taskType);
+      const bHasSkill = b.skills?.includes(taskType);
+      if (aHasSkill && !bHasSkill) return -1;
+      if (!aHasSkill && bHasSkill) return 1;
+      return 0;
+    });
+  };
+
   // ✅ Fetch Plots Assigned to This Manager
   useEffect(() => {
     const fetchPlots = async () => {
       try {
         const res = await axios.get(`/manager/${managerId}`);
-        setPlots(res.data.data); // Should return assigned plots
+        setPlots(res.data.data);
       } catch (error) {
         console.error("Failed to fetch plots:", error.message);
       }
@@ -40,7 +51,9 @@ function ManagerAddTask() {
       if (taskData.plotId) {
         try {
           const res = await axios.get(`/view/assignGardeners/${taskData.plotId}`);
-          setGardeners(res.data.data);
+          const fetchedGardeners = res.data.data || [];
+          const reordered = reorderGardenersBySkill(fetchedGardeners, taskData.taskType);
+          setGardeners(reordered);
         } catch (error) {
           console.error("Failed to fetch gardeners:", error.message);
         }
@@ -48,6 +61,15 @@ function ManagerAddTask() {
     };
     fetchGardeners();
   }, [taskData.plotId]);
+
+  // ✅ Handle Task Type Change
+  const handleTaskTypeChange = (selectedType) => {
+    setTaskData((prev) => ({ ...prev, taskType: selectedType }));
+    if (gardeners.length > 0) {
+      const reordered = reorderGardenersBySkill(gardeners, selectedType);
+      setGardeners(reordered);
+    }
+  };
 
   // ✅ Handle Form Submission
   const handleSubmit = async (e) => {
@@ -72,21 +94,6 @@ function ManagerAddTask() {
     } catch (error) {
       console.error("Task creation failed:", error.response?.data || error.message);
       alert("Failed to create task");
-    }
-  };
-
-  // ✅ Reorder gardeners based on selected taskType
-  const handleTaskTypeChange = (selectedType) => {
-    setTaskData((prev) => ({ ...prev, taskType: selectedType }));
-    if (taskData.plotId && gardeners.length > 0) {
-      const reordered = [...gardeners].sort((a, b) => {
-        const aHasSkill = a.skills?.includes(selectedType);
-        const bHasSkill = b.skills?.includes(selectedType);
-        if (aHasSkill && !bHasSkill) return -1;
-        if (!aHasSkill && bHasSkill) return 1;
-        return 0;
-      });
-      setGardeners(reordered);
     }
   };
 
@@ -168,7 +175,7 @@ function ManagerAddTask() {
                   <option value="">Select Gardener</option>
                   {gardeners.map((gardener) => (
                     <option key={gardener?._id} value={gardener?._id}>
-                      {gardener?.fullName} {gardener?.skills?.includes(taskData?.taskType) ? '🌟' : ''}
+                      {gardener?.fullName} {`(${gardener?.availabletime})`} {gardener?.skills?.includes(taskData?.taskType) ? '🌟' : ''}
                     </option>
                   ))}
                 </Form.Select>

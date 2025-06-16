@@ -48,6 +48,9 @@ import AdminViewResources from "./components/Admin/AdminViewResources";
 import ManagerViewResources from "./components/Manager/ManagerViewResources";
 import ManagerViewGardeners from "./components/Manager/ManagerViewGardeners";
 import ChatBot from "./components/chatbot/ChatBot";
+import CommunityViewGardeners from "./components/Community/CommunityViewGardeners";
+import CommunityViewManagers from "./components/Community/CommunityViewManagers";
+import CommunityViewGarden from "./components/Community/CommunityViewGarden";
 
 function App() {
   const url = "http://localhost:8080/upload";
@@ -135,6 +138,9 @@ function App() {
         element={<CommunityEditResource url={url} />}
       />
       <Route path="/community/home" element={<CommunityHomePage />} />
+      <Route path="/community/gardners" element={<CommunityViewGardeners  url={url}/>} />
+            <Route path="/community/managers" element={<CommunityViewManagers  url={url}/>} />
+      <Route path="/community/garden" element={<CommunityViewGarden  url={url}/>} />
 
       {/* community */}
 

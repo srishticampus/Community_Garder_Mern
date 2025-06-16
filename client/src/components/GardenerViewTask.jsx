@@ -14,6 +14,8 @@ function GardenerViewTask() {
     const fetchTasks = async () => {
       try {
         const res = await axios.get(`/task/gardener/${gardenerId}`);
+        console.log(res,"res");
+        
         setTaskData(res.data.data || []);
       } catch (err) {
         console.error("Failed to fetch tasks:", err);
@@ -56,6 +58,7 @@ function GardenerViewTask() {
               <tr>
                 <th>#</th>
                 <th>Task Title</th>
+                                <th>Assigned Plot</th>
                 <th>Description</th>
                 <th>Due Date</th>
                 <th>Status</th>
@@ -67,6 +70,7 @@ function GardenerViewTask() {
                   <tr key={task?._id}>
                     <td>{index + 1}</td>
                     <td>{task?.title}</td>
+                    <td>{task?.plotId?.plotName}</td>
                     <td>{task?.description}</td>
                     <td>{task?.dueDate?.split("T")[0]}</td>
                     <td>

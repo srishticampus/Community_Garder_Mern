@@ -40,7 +40,7 @@ function CommunityResourseView({ url }) {
       <Container className="resource-view-container">
         <h2 className="text-center mb-4">Available Resources</h2>
         <Row>
-          {resources.map((resource) => (
+          {resources.length>0 ? resources.map((resource) => (
             <Col md={6} lg={4} key={resource._id} className="mb-4">
               <Card className="resource-card h-100">
                 <div className="resource-image-wrapper">
@@ -77,7 +77,7 @@ function CommunityResourseView({ url }) {
                 </Card.Body>
               </Card>
             </Col>
-          ))}
+          )):" Currently No Resourses Found"}
         </Row>
       </Container>
     </div>

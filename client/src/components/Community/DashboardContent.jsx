@@ -49,7 +49,7 @@ const DashboardContent = () => {
   };
 
   return (
-    <div className="p-3">
+    <div className="p-3 mt-5">
       <div className="text-muted mb-2">Community / Dashboard</div>
       <h2 className="mb-4 text-success">Dashboard</h2>
 

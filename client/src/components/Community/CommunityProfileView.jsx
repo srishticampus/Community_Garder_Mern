@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import CommunitySidebar from "./CommunitySideBar"; // Ensure path is correct
+import CommunitySidebar from "./CommunityViewGardeners"; // Ensure path is correct
 import axiosInstance from "../../BaseAPI/axiosInstance";
+import CommunityResourceNav from "./CommunityResourceNav";
 
 function CommunityProfileView({url}) {
   const [profile, setProfile] = useState(null);
@@ -30,11 +31,11 @@ function CommunityProfileView({url}) {
       <div className="row">
         {/* Sidebar */}
         <div className="col-md-3 p-0">
-          <CommunitySidebar />
+          <CommunityResourceNav /> 
         </div>
 
         {/* Profile Content */}
-        <div className="col-md-9 p-4">
+        <div className=" p-4 mt-5">
           <div className="text-muted mb-2">Community / Profile</div>
           <h2 className="mb-4 text-success">Profile View</h2>
 

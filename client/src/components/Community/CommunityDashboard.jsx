@@ -1,11 +1,12 @@
 import React from 'react';
-import CommunitySidebar from './CommunitySideBar';
+import CommunitySidebar from './CommunityViewGardeners';
 import DashboardContent from './DashboardContent';
+import CommunityResourceNav from './CommunityResourceNav';
 
 function CommunityDashboard() {
   return (
     <div className="admin-dashboard d-flex">
-      <CommunitySidebar />
+      <CommunityResourceNav />
       <DashboardContent/>
     </div>
   );

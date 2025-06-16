@@ -89,6 +89,8 @@ function ViewEvent({url}) {
                       <li><strong>📅 End Date:</strong> {event?.endDate?.slice(0, 10)}</li>
                       <li><strong>📍 Venue:</strong> {event?.venue}</li>
                       <li><strong>📌 Type:</strong> {event?.eventType}</li>
+                                            <li><strong> Participants Count:</strong> {event?.participants.length}</li>
+
                     </ul>
                     <Button variant="outline-primary" className="me-2" onClick={() => openEditModal(event)}>Edit</Button>
                     <Button variant="outline-danger" onClick={() => handleDelete(event._id)}>Delete</Button>
