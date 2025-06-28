@@ -27,9 +27,9 @@ const DashboardContent = () => {
   const fetchDashboardCounts = async () => {
     try {
       const [managerRes, userRes, orgRes, gardenRes, eventRes, resourceRes] = await Promise.all([
-        axios.post("/manager/viewall"),
-        axios.post("/gardner/viewallgardner"),
-        axios.post("/organization/viewall"),
+        axios.get("/manager/viewall"),
+        axios.get("/gardner/viewallgardner"),
+        axios.get("/organization/viewall"),
         axios.get("/plot/viewallgarden"),
         axios.get("/event/upcoming"),
         axios.get("/resource/all"),

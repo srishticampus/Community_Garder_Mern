@@ -13,29 +13,33 @@ function ManagerLogin() {
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setErrorMessage("");
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  setErrorMessage("");
 
-    try {
-      const res = await axiosInstance.post("/manager/login", formData);
+  try {
+    const res = await axiosInstance.post("/manager/login", formData);
 
-      if (res.data.success== true) {
-        // Store manager token/ID in localStorage (if needed)
-        localStorage.setItem("managerId", res.data.user.id);
+    if (res.data.success === true) {
+      const manager = res.data.user;
 
-        // Redirect to manager dashboard or homepage
-        navigate("/manager/home");
-      } else {
-        setErrorMessage(res.data.message || "Login failed.");
+      if (manager.activestatus === false) {
+        alert("Your account is not activated. Please contact admin.");
+        return; // stop login
       }
-    } catch (error) {
-      console.error("Login error:", error);
-      setErrorMessage(
-        error.response?.data?.message || "Something went wrong during login."
-      );
+
+      localStorage.setItem("managerId", manager.id);
+      navigate("/manager/home");
+    } else {
+      setErrorMessage(res.data.message || "Login failed.");
     }
-  };
+  } catch (error) {
+    console.error("Login error:", error);
+    setErrorMessage(
+      error.response?.data?.message || "Something went wrong during login."
+    );
+  }
+};
 
   const handleChange = (e) => {
     setFormData({

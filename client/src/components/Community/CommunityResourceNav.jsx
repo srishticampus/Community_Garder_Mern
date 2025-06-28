@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar, Nav, Container, Button, Badge } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   FaBook,
   FaChevronDown,
@@ -17,6 +17,13 @@ import "../../assets/css/CommunityResourceNav.css";
 import { MdManageAccounts } from "react-icons/md";
 
 function CommunityResourceNav() {
+  const nav = useNavigate();
+
+  const handlelogout = () => {
+    localStorage.removeItem("orgId");
+    nav("/Cammunity/Login");
+    alert("please login again");
+  };
   return (
     <div>
       <Navbar
@@ -68,6 +75,9 @@ function CommunityResourceNav() {
               <Nav.Link as={Link} to="/community/garden">
                 <FaLeaf className="nav-icon" /> Gardens
               </Nav.Link>
+              <button className="btn btn-light" onClick={handlelogout}>
+                  Logout
+                </button>
             </Nav>
           </Navbar.Collapse>
         </Container>

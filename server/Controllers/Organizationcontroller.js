@@ -63,6 +63,7 @@ const saveorg = async (req, res) => {
       phoneNo,
       password: hashedPassword,
       confirmPass,
+      activestatus:false
     });
 
     const result = await org.save();
@@ -107,6 +108,7 @@ const loginvalidateorg = async (req, res) => {
         id: existingOrg._id,
         organizationName: existingOrg.organizationName,
         emailId: existingOrg.emailId,
+        activestatus: existingOrg.activestatus
       },
     });
   } catch (error) {
@@ -209,7 +211,62 @@ const forgotOrganizationPassword = async (req, res) => {
     console.error("Error updating password:", error);
     res.status(500).json({ message: "Error updating password", error: error.message });
   }
+}
+
+// ✅ Activate Organization
+const activateOrganization = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const updatedOrg = await Organization.findByIdAndUpdate(
+      id,
+      { activestatus: true },
+      { new: true }
+    );
+
+    if (!updatedOrg) {
+      return res.status(404).json({ message: "Organization not found" });
+    }
+
+    res.status(200).json({
+      message: "Organization activated successfully",
+      data: updatedOrg,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error activating organization",
+      error: error.message,
+    });
+  }
 };
+
+// ✅ Deactivate Organization
+const deactivateOrganization = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const updatedOrg = await Organization.findByIdAndUpdate(
+      id,
+      { activestatus: false },
+      { new: true }
+    );
+
+    if (!updatedOrg) {
+      return res.status(404).json({ message: "Organization not found" });
+    }
+
+    res.status(200).json({
+      message: "Organization deactivated successfully",
+      data: updatedOrg,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error deactivating organization",
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   saveorg,
   uploadimg,
@@ -217,5 +274,7 @@ module.exports = {
   getAllOrganizations,
   getOrganizationById,
   updateOrganizationById,
+  deactivateOrganization,
+  activateOrganization,
   forgotOrganizationPassword
 };

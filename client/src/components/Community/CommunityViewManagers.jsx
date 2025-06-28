@@ -9,7 +9,7 @@ function CommunityViewManagers({ url }) {
   const [managers, setManagers] = useState([]);
 
   useEffect(() => {
-    axios.post('/manager/viewall')
+    axios.get('/manager/viewall')
       .then((res) => {
         setManagers(res.data); // Ensure it matches your backend response
       })

@@ -45,6 +45,7 @@ const saveManager = async (req, res) => {
       pincode: req.body.pincode,
       password: hashedPassword,
       yearofexperience: req.body.yearofexperience,
+      activestatus:false
     });
 
     const result = await newManager.save();
@@ -90,6 +91,7 @@ const loginManager = async (req, res) => {
         id: existingUser._id,
         fullName: existingUser.fullName,
         emailId: existingUser.emailId,
+         activestatus: existingUser.activestatus,
       },
     });
   } catch (error) {
@@ -185,6 +187,60 @@ const forgotManagerPassword = async (req, res) => {
     res.status(500).json({ message: "Error updating password", error: error.message });
   }
 };
+// ✅ Activate Organization
+const activatemanager = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const updatedOrg = await managers.findByIdAndUpdate(
+      id,
+      { activestatus: true },
+      { new: true }
+    );
+
+    if (!updatedOrg) {
+      return res.status(404).json({ message: "managers not found" });
+    }
+
+    res.status(200).json({
+      message: "manager activated successfully",
+      data: updatedOrg,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error activating managers",
+      error: error.message,
+    });
+  }
+};
+
+// ✅ Deactivate Organization
+const deactivatemanager = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const updatedOrg = await managers.findByIdAndUpdate(
+      id,
+      { activestatus: false },
+      { new: true }
+    );
+
+    if (!updatedOrg) {
+      return res.status(404).json({ message: "managers not found" });
+    }
+
+    res.status(200).json({
+      message: "managers deactivated successfully",
+      data: updatedOrg,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error deactivating managers",
+      error: error.message,
+    });
+  }
+};
+
 
 module.exports = {
   saveManager,
@@ -193,5 +249,6 @@ module.exports = {
   viewAllManagers,
   viewManagerById,
   updateManagerById,
-  forgotManagerPassword,
+  forgotManagerPassword,deactivatemanager,
+  activatemanager
 };

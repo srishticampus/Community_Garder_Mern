@@ -51,6 +51,8 @@ import ChatBot from "./components/chatbot/ChatBot";
 import CommunityViewGardeners from "./components/Community/CommunityViewGardeners";
 import CommunityViewManagers from "./components/Community/CommunityViewManagers";
 import CommunityViewGarden from "./components/Community/CommunityViewGarden";
+import Adminvieworgrequest from "./components/Admin/Adminvieworgrequest";
+import Adminviewmanagerrequest from "./components/Admin/Adminviewmanagerrequest";
 
 function App() {
   const url = "http://localhost:8080/upload";
@@ -67,7 +69,7 @@ function App() {
       {/* gardener */}
 
       <Route path="/gardener/home" element={<GardenerHome />} />
-            <Route path="/chatbot" element={<ChatBot />} />
+      <Route path="/chatbot" element={<ChatBot />} />
 
       <Route
         path="/gardener/viewgarden"
@@ -77,7 +79,10 @@ function App() {
       <Route path="/gardener/chat" element={<Gardnerchat />} />
       <Route path="/gardener/profile" element={<GardenerProfile />} />
       <Route path="/gardener/viewevent" element={<EventView url={url} />} />
-      <Route path="/gardener/viewresource" element={<ViewResource url={url} />} />
+      <Route
+        path="/gardener/viewresource"
+        element={<ViewResource url={url} />}
+      />
       <Route
         path="/gardener/forgetpassword"
         element={<GardnerForgetpasswordPage />}
@@ -94,7 +99,10 @@ function App() {
         element={<ManagerForgetPassword />}
       />
       <Route path="/manager/home" element={<ManagerHomePage />} />
-      <Route path="/manager/profilepage" element={<ManagerProfilePage url={url} />} />
+      <Route
+        path="/manager/profilepage"
+        element={<ManagerProfilePage url={url} />}
+      />
       <Route path="/manager/edit/profile" element={<ManagerEditProfile />} />
       <Route path="/manager/viewtask" element={<ManagerViewTask />} />
       <Route path="/manager/addtask" element={<ManagerAddTask />} />
@@ -120,7 +128,10 @@ function App() {
         element={<CommunityForgotPassword />}
       />
       <Route path="/community/dashboard" element={<CommunityDashboard />} />
-      <Route path="/community/profileview" element={<CommunityProfileView url={url} />} />
+      <Route
+        path="/community/profileview"
+        element={<CommunityProfileView url={url} />}
+      />
       <Route
         path="/community/editprofile"
         element={<CommunityEditProfile url={url} />}
@@ -138,9 +149,18 @@ function App() {
         element={<CommunityEditResource url={url} />}
       />
       <Route path="/community/home" element={<CommunityHomePage />} />
-      <Route path="/community/gardners" element={<CommunityViewGardeners  url={url}/>} />
-            <Route path="/community/managers" element={<CommunityViewManagers  url={url}/>} />
-      <Route path="/community/garden" element={<CommunityViewGarden  url={url}/>} />
+      <Route
+        path="/community/gardners"
+        element={<CommunityViewGardeners url={url} />}
+      />
+      <Route
+        path="/community/managers"
+        element={<CommunityViewManagers url={url} />}
+      />
+      <Route
+        path="/community/garden"
+        element={<CommunityViewGarden url={url} />}
+      />
 
       {/* community */}
 
@@ -148,16 +168,43 @@ function App() {
 
       <Route path="/admin/login" element={<AdminLogin />} />
       <Route path="/admin/dashboard" element={<AdminHomePage />} />
-      <Route path="/admin/view/garden" element={<AdminViewGarden url={url} />} />
-      <Route path="/admin/view/gardeners" element={<AdminViewGardeners url={url} />} />
-      <Route path="/admin/view/managers" element={<AdminViewManagers url={url} />} />
+      <Route
+        path="/admin/view/garden"
+        element={<AdminViewGarden url={url} />}
+      />
+      <Route
+        path="/admin/view/gardeners"
+        element={<AdminViewGardeners url={url} />}
+      />
+      <Route
+        path="/admin/view/managers"
+        element={<AdminViewManagers url={url} />}
+      />
+      <Route
+        path="/admin/view/orgrequest"
+        element={<Adminvieworgrequest url={url} />}
+      />
+
+      <Route
+        path="/admin/view/managerrequest"
+        element={<Adminviewmanagerrequest url={url} />}
+      />
       <Route
         path="/admin/view/organization"
         element={<AdminViewOrganization url={url} />}
       />
-      <Route path="/admin/view/resource" element={<AdminViewResources url={url} />} />
-      <Route path="/manager/view/resource" element={<ManagerViewResources url={url} />} />
-      <Route path="/manager/view/gardners" element={<ManagerViewGardeners url={url} />} />
+      <Route
+        path="/admin/view/resource"
+        element={<AdminViewResources url={url} />}
+      />
+      <Route
+        path="/manager/view/resource"
+        element={<ManagerViewResources url={url} />}
+      />
+      <Route
+        path="/manager/view/gardners"
+        element={<ManagerViewGardeners url={url} />}
+      />
 
       {/* admin */}
     </Routes>

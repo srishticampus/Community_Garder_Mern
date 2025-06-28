@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Row, Col, Card } from 'react-bootstrap';
+import { Row, Col, Card, Spinner } from 'react-bootstrap';
 import { FaUsers, FaUserTie, FaBox } from 'react-icons/fa';
-import axios from '../../BaseAPI/axiosInstance'; // Adjust path based on your structure
+import axios from '../../BaseAPI/axiosInstance'; // Adjust path as needed
 
 const DashboardContent = () => {
   const [counts, setCounts] = useState({
     managers: 0,
     users: 0,
+    organizations: 0,
     gardens: 0,
     events: 0,
     resources: 0,
-    organizations: 0,
   });
+
+  const [loading, setLoading] = useState(true);
 
   const cardStyle = {
     backgroundColor: '#198754',
@@ -26,27 +28,45 @@ const DashboardContent = () => {
 
   const fetchDashboardCounts = async () => {
     try {
-      const [managerRes, userRes, orgRes, gardenRes, eventRes, resourceRes] = await Promise.all([
-        axios.post("/manager/viewall"),
-        axios.post("/gardner/viewallgardner"),
-        axios.post("/organization/viewall"),
+      const [
+        managerRes,
+        userRes,
+        orgRes,
+        gardenRes,
+        eventRes,
+        resourceRes,
+      ] = await Promise.all([
+        axios.get("/manager/viewall"),
+        axios.get("/gardner/viewallgardner"),
+        axios.get("/organization/viewall"),
         axios.get("/plot/viewallgarden"),
         axios.get("/event/upcoming"),
         axios.get("/resource/all"),
       ]);
 
       setCounts({
-        managers: managerRes?.data?.length || 0,
-        users: userRes?.data?.length || 0,
-        organizations: orgRes?.data?.data?.length || 0,
-        gardens: gardenRes?.data?.data?.length || 0,
-        events: eventRes?.data?.length || 0,
-        resources: resourceRes?.data?.data?.length || 0,
+        managers: managerRes?.data?.length ?? 0,
+        users: userRes?.data?.length ?? 0,
+        organizations: orgRes?.data?.data?.length ?? 0,
+        gardens: gardenRes?.data?.data?.length ?? 0,
+        events: eventRes?.data?.length ?? 0,
+        resources: resourceRes?.data?.data?.length ?? 0,
       });
     } catch (error) {
       console.error("Failed to load dashboard data", error);
+    } finally {
+      setLoading(false);
     }
   };
+
+  if (loading) {
+    return (
+      <div className="p-5 text-center">
+        <Spinner animation="border" variant="success" />
+        <p className="mt-2 text-muted">Loading dashboard data...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="p-3">
@@ -58,7 +78,7 @@ const DashboardContent = () => {
           <Card style={cardStyle} className="text-center shadow">
             <Card.Body>
               <h5>Managers</h5>
-              <div className="display-6">{counts?.managers}</div>
+              <div className="display-6">{counts.managers}</div>
               <FaUserTie size={30} />
             </Card.Body>
           </Card>
@@ -68,7 +88,7 @@ const DashboardContent = () => {
           <Card style={cardStyle} className="text-center shadow">
             <Card.Body>
               <h5>All Users</h5>
-              <div className="display-6">{counts?.users}</div>
+              <div className="display-6">{counts.users}</div>
               <FaUsers size={30} />
             </Card.Body>
           </Card>
@@ -78,7 +98,7 @@ const DashboardContent = () => {
           <Card style={cardStyle} className="text-center shadow">
             <Card.Body>
               <h5>Organizations</h5>
-              <div className="display-6">{counts?.organizations}</div>
+              <div className="display-6">{counts.organizations}</div>
               <FaUserTie size={30} />
             </Card.Body>
           </Card>
@@ -88,7 +108,7 @@ const DashboardContent = () => {
           <Card style={cardStyle} className="text-center shadow">
             <Card.Body>
               <h5>Gardens</h5>
-              <div className="display-6">{counts?.gardens}</div>
+              <div className="display-6">{counts.gardens}</div>
               <FaUserTie size={30} />
             </Card.Body>
           </Card>
@@ -98,7 +118,7 @@ const DashboardContent = () => {
           <Card style={cardStyle} className="text-center shadow">
             <Card.Body>
               <h5>Events</h5>
-              <div className="display-6">{counts?.events}</div>
+              <div className="display-6">{counts.events}</div>
               <FaBox size={30} />
             </Card.Body>
           </Card>
@@ -108,7 +128,7 @@ const DashboardContent = () => {
           <Card style={cardStyle} className="text-center shadow">
             <Card.Body>
               <h5>Resources</h5>
-              <div className="display-6">{counts?.resources}</div>
+              <div className="display-6">{counts.resources}</div>
               <FaBox size={30} />
             </Card.Body>
           </Card>
