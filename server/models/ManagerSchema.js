@@ -38,10 +38,10 @@ var ManagerSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  // confirmPass: {
-  //   type: String,
-  //   required: true,
-  // },
+  activestatus: {
+    type: Boolean,
+    required: true,
+  },
   yearofexperience: {
     type: Number,
     required: true,

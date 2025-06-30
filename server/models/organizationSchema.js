@@ -29,8 +29,8 @@ var OrganizationSchema=mongoose.Schema({
         type:String,
         required:true
     },
-    confirmPass: {
-        type:String,
+    activestatus: {
+        type:Boolean,
         required:true
     }
 });

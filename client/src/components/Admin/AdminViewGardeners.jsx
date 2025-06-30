@@ -12,7 +12,7 @@ function AdminViewGardeners({ url }) {
   const [gardeners, setGardeners] = useState([]);
 
   useEffect(() => {
-    axios.post('/gardner/viewallgardner')
+    axios.get('/gardner/viewallgardner')
       .then((res) => {
         setGardeners(res.data || []); // Adjust according to actual structure
       })

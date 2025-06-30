@@ -20,7 +20,7 @@ function CommunityViewGarden({ url }) {
           setPlots(plotRes.data.data);
         }
 
-        const gardenerRes = await axios.post('/gardner/viewallgardner');
+        const gardenerRes = await axios.get('/gardner/viewallgardner');
         if (gardenerRes) {
           setGardeners(gardenerRes.data);
         }

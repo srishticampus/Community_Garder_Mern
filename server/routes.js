@@ -16,23 +16,26 @@ route.post('/gardner/login', gardnercontroller.logingardner);
 route.post("/gardner/forgotpassword", gardnercontroller.forgotGardnerPassword);
 route.post('/gardner/viewone/:id', gardnercontroller.viewGardnerById);
 route.post("/gardner/profileupdate/:id", gardnercontroller.updateGardnerById);
-route.post("/gardner/viewallgardner", gardnercontroller.viewAllGardners);
+route.get("/gardner/viewallgardner", gardnercontroller.viewAllGardners);
 
 route.post("/manager/register", managerController.uploadManagerImg, managerController.saveManager);
 route.post("/manager/login", managerController.loginManager);
-route.post("/manager/viewall", managerController.viewAllManagers);
+route.get("/manager/viewall", managerController.viewAllManagers);
 route.post("/manager/viewone/:id", managerController.viewManagerById);
 route.post("/manager/profileupdate/:id", managerController.uploadManagerImg, managerController.updateManagerById);
 route.post("/manager/forgot-password", managerController.forgotManagerPassword);
+route.put('/manager/activate/:id', managerController.activatemanager);
+route.put('/manager/deactivate/:id',managerController.deactivatemanager);
 
 
 route.post("/organization/register", organizationcontroller.uploadimg, organizationcontroller.saveorg);
 route.post("/organization/login", organizationcontroller.loginvalidateorg);
-route.post("/organization/viewall", organizationcontroller.getAllOrganizations);
+route.get("/organization/viewall", organizationcontroller.getAllOrganizations);
 route.post("/organization/viewone/:id", organizationcontroller.getOrganizationById);
 route.post("/organization/profileedit/:id", organizationcontroller.uploadimg, organizationcontroller.updateOrganizationById);
 route.post("/organization/forgot-password", organizationcontroller.forgotOrganizationPassword);
-
+route.put('/organization/activate/:id', organizationcontroller.activateOrganization);
+route.put('/organization/deactivate/:id',organizationcontroller.deactivateOrganization);
 route.post('/adminlogin', admincontroller.loginvalidateadmin);
 
 // ploat

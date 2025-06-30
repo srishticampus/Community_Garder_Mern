@@ -5,8 +5,8 @@ import axiosInstance from "../../BaseAPI/axiosInstance"; // Use your configured 
 
 function CammunityLoginpage() {
   const [formData, setFormData] = useState({
-    email: '',
-    password: ''
+    email: "",
+    password: "",
   });
 
   const [errorMessage, setErrorMessage] = useState("");
@@ -19,17 +19,27 @@ function CammunityLoginpage() {
     try {
       const res = await axiosInstance.post("/organization/login", formData);
 
-      if (res.data.success) {
-        localStorage.setItem("orgId", res.data.data.id); // optional
+      if (res) {
+        const user = res.data.data;
+console.log(res);
 
-        // Redirect after successful login
+        if (res.data.data.activestatus == false) {
+          alert("Your account is not activated. Please contact admin.");
+          return; // prevent navigation
+        }
+
+        localStorage.setItem("orgId", user.id); // optional
         navigate("/Community/Dashboard");
       } else {
         setErrorMessage(res.data.message || "Login failed");
       }
     } catch (error) {
       console.error("Login error:", error);
-      if (error.response && error.response.data && error.response.data.message) {
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
         setErrorMessage(error.response.data.message);
       } else {
         setErrorMessage("Login failed. Please try again.");
@@ -40,7 +50,7 @@ function CammunityLoginpage() {
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -52,10 +62,14 @@ function CammunityLoginpage() {
           <div className="card">
             <div className="card-body">
               <h2 className="text-center mb-4">Login</h2>
-              {errorMessage && <p className="text-danger text-center">{errorMessage}</p>}
+              {errorMessage && (
+                <p className="text-danger text-center">{errorMessage}</p>
+              )}
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
-                  <label htmlFor="email" className="form-label">Email address</label>
+                  <label htmlFor="email" className="form-label">
+                    Email address
+                  </label>
                   <input
                     type="email"
                     className="form-control"
@@ -67,7 +81,9 @@ function CammunityLoginpage() {
                   />
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="password" className="form-label">Password</label>
+                  <label htmlFor="password" className="form-label">
+                    Password
+                  </label>
                   <input
                     type="password"
                     className="form-control"
@@ -80,7 +96,9 @@ function CammunityLoginpage() {
                 </div>
 
                 <p className="text-center mt-3">
-                  <Link to={"/Community/Forgotpassword"}>Forgot Your Password?</Link>
+                  <Link to={"/Community/Forgotpassword"}>
+                    Forgot Your Password?
+                  </Link>
                 </p>
 
                 <button type="submit" className="btn btn-success w-100">

@@ -68,7 +68,7 @@ exports.ViewallGardenPlot = async (req, res) => {
     const plots = await GardenPlot.find({}).populate("assignedGardeners managerId");
 
     if (!plots || plots.length === 0) {
-      return res.status(404).json({ success: false, message: "No garden plots found" });
+      return res.json({ success: false, message: "No garden plots found" });
     }
 
     // console.log(plots, "plots");
