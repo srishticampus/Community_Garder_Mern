@@ -1,6 +1,7 @@
 import React from "react";
 import { Navbar, Nav, Container, Button, Badge } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
+
 import {
   FaBook,
   FaChevronDown,
@@ -24,6 +25,7 @@ function CommunityResourceNav() {
     nav("/Cammunity/Login");
     alert("please login again");
   };
+
   return (
     <div>
       <Navbar
@@ -75,9 +77,15 @@ function CommunityResourceNav() {
               <Nav.Link as={Link} to="/community/garden">
                 <FaLeaf className="nav-icon" /> Gardens
               </Nav.Link>
-              <button className="btn btn-light" onClick={handlelogout}>
-                  Logout
-                </button>
+
+ <Button
+        variant="light"
+        onClick={handlelogout}
+        className="text-success fw-bold"
+      >
+        LOGOUT
+      </Button>             
+
             </Nav>
           </Navbar.Collapse>
         </Container>

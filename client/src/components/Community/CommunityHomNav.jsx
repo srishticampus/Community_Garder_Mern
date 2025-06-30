@@ -84,9 +84,13 @@ function CommunityHomNav() {
                                 <Link to="/manager/profilepage" className='text-light me-3'> <FaUserCircle size={30} />
                                 </Link>
             
-                                <button className="btn btn-danger">
-                                    Logout
-                                </button>
+                               <Button
+        variant="light"
+        onClick={handlelogout}
+        className="text-success fw-bold"
+      >
+        LOGOUT
+      </Button>
                             </div>
                         </div>
                     </nav>
